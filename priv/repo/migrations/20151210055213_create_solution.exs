@@ -4,6 +4,7 @@ defmodule Zohyohtanksgiving.Repo.Migrations.CreateSolution do
   def change do
     create table(:solutions) do
       add :body, :string
+      add :question_id, references(:questions)
 
       timestamps
     end

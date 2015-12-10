@@ -4,7 +4,7 @@ defmodule Zohyohtanksgiving.Solution do
   schema "solutions" do
     field :body, :string
 
-    belongs_to :solution, Zohyohtanksgiving.Question, foreign_key: :question_id
+    belongs_to :question, Zohyohtanksgiving.Question, foreign_key: :question_id
     timestamps
   end
 

@@ -5,7 +5,7 @@ defmodule Zohyohtanksgiving.Question do
     field :title, :string
     field :body, :string
 
-    has_many :questions, Zohyothanksgiving.Solution
+    has_many :solutions, Zohyothanksgiving.Solution
     timestamps
   end
 
