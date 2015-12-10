@@ -1,0 +1,26 @@
+<h2>Listing solutions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Body</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for solution <- @solutions do %>
+    <tr>
+      <td><%= solution.body %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: question_solution_path(@conn, :show, solution), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: question_solution_path(@conn, :edit, solution), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: question_solution_path(@conn, :delete, solution), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New solution", to: question_solution_path(@conn, :new, @question) %>

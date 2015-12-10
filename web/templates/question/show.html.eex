@@ -1,0 +1,18 @@
+<h2>Show question</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @question.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @question.body %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: question_path(@conn, :edit, @question) %>
+<%= link "Back", to: question_path(@conn, :index) %>

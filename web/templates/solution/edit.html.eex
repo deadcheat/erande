@@ -1,0 +1,6 @@
+<h2>Edit solution</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: question_solution_path(@conn, :update, @solution) %>
+
+<%= link "Back", to: question_solution_path(@conn, :index, @question) %>

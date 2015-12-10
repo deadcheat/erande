@@ -17,6 +17,9 @@ defmodule Zohyohtanksgiving.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/questions", QuestionController do
+      resources "/solutions", SolutionController
+    end
   end
 
   # Other scopes may use custom stacks.
