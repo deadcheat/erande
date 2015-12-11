@@ -3,6 +3,8 @@
 /db
 /deps
 /*.ez
+/.idea/misc.xml
+/.idea/workspace.xml
 
 # Generate on crash by the VM
 erl_crash.dump
