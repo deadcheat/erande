@@ -1,9 +1,20 @@
-<h2>Listing solutions</h2>
-
+<h2>問題</h2>
+<ul>
+  <li>
+    <strong>タイトル:</strong>
+    <%= @question.title %>
+  </li>
+  <li>
+    <strong>問題文:</strong>
+    <%= @question.body %>
+  </li>
+</ul>
+<h2>解答一覧</h2>
 <table class="table">
   <thead>
     <tr>
-      <th>Body</th>
+      <th>正答？</th>
+      <th>文章</th>
 
       <th></th>
     </tr>
@@ -11,16 +22,30 @@
   <tbody>
 <%= for solution <- @solutions do %>
     <tr>
-      <td><%= solution.body %></td>
+      <td>
+        <%= if !is_nil(solution.collectanswer) do %>
+          <font class="badge">正答</font>
+        <%= end %>
+      </td>
+      <td>
+        <%= solution.body %>
+      </td>
 
       <td class="text-right">
+        <%= if is_nil(solution.collectanswer) do %>
+          <%= link "Mark", to: solution_path(@conn, :mark, solution), class: "btn btn-default btn-xs" %>
+        <%= else %>
+          <%= link "UnMark", to: solution_path(@conn, :unmark, solution), class: "btn btn-default btn-xs red" %>
+        <%= end %>
         <%= link "Show", to: question_solution_path(@conn, :show, @question_id, solution), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: question_solution_path(@conn, :edit, @question_id, solution), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: question_solution_path(@conn, :delete, @question_id, solution), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: question_solution_path(@conn, :delete, @question_id, solution), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger red btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New solution", to: question_solution_path(@conn, :new, @question_id) %>
+<%= link "選択肢を追加", to: question_solution_path(@conn, :new, @question_id) %>
+<br/>
+<%= link "問題一覧に戻る", to: question_path(@conn, :index) %>

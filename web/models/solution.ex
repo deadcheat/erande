@@ -5,6 +5,7 @@ defmodule Zohyohtanksgiving.Solution do
     field :body, :string
 
     belongs_to :question, Zohyohtanksgiving.Question, foreign_key: :question_id
+    has_one :collectanswer, Zohyohtanksgiving.Collectanswer
     timestamps
   end
 

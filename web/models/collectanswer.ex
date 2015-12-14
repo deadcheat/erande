@@ -1,16 +1,14 @@
-defmodule Zohyohtanksgiving.Question do
+defmodule Zohyohtanksgiving.Collectanswer do
   use Zohyohtanksgiving.Web, :model
 
-  schema "questions" do
-    field :title, :string
-    field :body, :string
+  schema "collectanswers" do
+    belongs_to :question, Zohyohtanksgiving.Question, foreign_key: :question_id
+    belongs_to :solution, Zohyohtanksgiving.Solution, foreign_key: :solution_id
 
-    has_many :solutions, Zohyothanksgiving.Solution
-    has_many :collectanswers, Zohyohtanksgiving.Collectanswer
     timestamps
   end
 
-  @required_fields ~w(title body)
+  @required_fields ~w(question_id solution_id)
   @optional_fields ~w()
 
   @doc """
