@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :zohyohtanksgiving, Zohyohtanksgiving.Endpoint,
+config :zohyothanksgiving, Zohyothanksgiving.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "dHS/yzqGMG82YXiMRmB6zZ+9DGe0CMjATCF1D14ESdc3jvzptneoy4a4rlhlF1Bi",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: Zohyohtanksgiving.PubSub,
+  pubsub: [name: Zohyothanksgiving.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

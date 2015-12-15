@@ -1,7 +1,7 @@
-defmodule Zohyohtanksgiving.CollectanswerTest do
-  use Zohyohtanksgiving.ModelCase
+defmodule Zohyothanksgiving.CollectanswerTest do
+  use Zohyothanksgiving.ModelCase
 
-  alias Zohyohtanksgiving.Collectanswer
+  alias Zohyothanksgiving.Collectanswer
 
   @valid_attrs %{}
   @invalid_attrs %{}

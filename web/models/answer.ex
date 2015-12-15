@@ -1,9 +1,9 @@
-defmodule Zohyohtanksgiving.Answer do
-  use Zohyohtanksgiving.Web, :model
+defmodule Zohyothanksgiving.Answer do
+  use Zohyothanksgiving.Web, :model
 
   schema "answers" do
     field :respondent, :string
-    belongs_to :solution, Zohyohtanksgiving.Solution
+    belongs_to :solution, Zohyothanksgiving.Solution
 
     timestamps
   end

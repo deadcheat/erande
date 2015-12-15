@@ -1,7 +1,7 @@
-defmodule Zohyohtanksgiving.RoomChannelTest do
-  use Zohyohtanksgiving.ChannelCase
+defmodule Zohyothanksgiving.RoomChannelTest do
+  use Zohyothanksgiving.ChannelCase
 
-  alias Zohyohtanksgiving.RoomChannel
+  alias Zohyothanksgiving.RoomChannel
 
   setup do
     {:ok, _, socket} =

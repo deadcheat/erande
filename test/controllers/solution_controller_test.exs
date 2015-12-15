@@ -1,7 +1,7 @@
-defmodule Zohyohtanksgiving.SolutionControllerTest do
-  use Zohyohtanksgiving.ConnCase
+defmodule Zohyothanksgiving.SolutionControllerTest do
+  use Zohyothanksgiving.ConnCase
 
-  alias Zohyohtanksgiving.Solution
+  alias Zohyothanksgiving.Solution
   @valid_attrs %{body: "some content"}
   @invalid_attrs %{}
 

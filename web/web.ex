@@ -1,12 +1,12 @@
-defmodule Zohyohtanksgiving.Web do
+defmodule Zohyothanksgiving.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Zohyohtanksgiving.Web, :controller
-      use Zohyohtanksgiving.Web, :view
+      use Zohyothanksgiving.Web, :controller
+      use Zohyothanksgiving.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -29,11 +29,11 @@ defmodule Zohyohtanksgiving.Web do
     quote do
       use Phoenix.Controller
 
-      alias Zohyohtanksgiving.Repo
+      alias Zohyothanksgiving.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import Zohyohtanksgiving.Router.Helpers
+      import Zohyothanksgiving.Router.Helpers
     end
   end
 
@@ -47,7 +47,7 @@ defmodule Zohyohtanksgiving.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Zohyohtanksgiving.Router.Helpers
+      import Zohyothanksgiving.Router.Helpers
     end
   end
 
@@ -61,7 +61,7 @@ defmodule Zohyohtanksgiving.Web do
     quote do
       use Phoenix.Channel
 
-      alias Zohyohtanksgiving.Repo
+      alias Zohyothanksgiving.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
     end

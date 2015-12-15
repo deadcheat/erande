@@ -1,3 +1,3 @@
-defmodule Zohyohtanksgiving.SolutionView do
-  use Zohyohtanksgiving.Web, :view
+defmodule Zohyothanksgiving.SolutionView do
+  use Zohyothanksgiving.Web, :view
 end

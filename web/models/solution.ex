@@ -1,11 +1,11 @@
-defmodule Zohyohtanksgiving.Solution do
-  use Zohyohtanksgiving.Web, :model
+defmodule Zohyothanksgiving.Solution do
+  use Zohyothanksgiving.Web, :model
 
   schema "solutions" do
     field :body, :string
 
-    belongs_to :question, Zohyohtanksgiving.Question, foreign_key: :question_id
-    has_one :collectanswer, Zohyohtanksgiving.Collectanswer
+    belongs_to :question, Zohyothanksgiving.Question, foreign_key: :question_id
+    has_one :collectanswer, Zohyothanksgiving.Collectanswer
     timestamps
   end
 

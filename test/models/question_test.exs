@@ -1,7 +1,7 @@
-defmodule Zohyohtanksgiving.QuestionTest do
-  use Zohyohtanksgiving.ModelCase
+defmodule Zohyothanksgiving.QuestionTest do
+  use Zohyothanksgiving.ModelCase
 
-  alias Zohyohtanksgiving.Question
+  alias Zohyothanksgiving.Question
 
   @valid_attrs %{body: "some content", title: "some content"}
   @invalid_attrs %{}

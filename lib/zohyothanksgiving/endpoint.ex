@@ -1,14 +1,14 @@
-defmodule Zohyohtanksgiving.Endpoint do
-  use Phoenix.Endpoint, otp_app: :zohyohtanksgiving
+defmodule Zohyothanksgiving.Endpoint do
+  use Phoenix.Endpoint, otp_app: :zohyothanksgiving
 
-  socket "/socket", Zohyohtanksgiving.UserSocket
+  socket "/socket", Zohyothanksgiving.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :zohyohtanksgiving, gzip: false,
+    at: "/", from: :zohyothanksgiving, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -32,8 +32,8 @@ defmodule Zohyohtanksgiving.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_zohyohtanksgiving_key",
+    key: "_zohyothanksgiving_key",
     signing_salt: "rVutZAL7"
 
-  plug Zohyohtanksgiving.Router
+  plug Zohyothanksgiving.Router
 end

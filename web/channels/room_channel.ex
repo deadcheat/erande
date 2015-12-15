@@ -1,5 +1,5 @@
-defmodule Zohyohtanksgiving.RoomChannel do
-  use Zohyohtanksgiving.Web, :channel
+defmodule Zohyothanksgiving.RoomChannel do
+  use Zohyothanksgiving.Web, :channel
 
   def join("rooms:lobby", payload, socket) do
     if authorized?(payload) do

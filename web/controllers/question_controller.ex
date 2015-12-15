@@ -1,11 +1,11 @@
 ## ----------------------
 ## 問題管理コントローラー
 ## ----------------------
-defmodule Zohyohtanksgiving.QuestionController do
-  use Zohyohtanksgiving.Web, :controller
+defmodule Zohyothanksgiving.QuestionController do
+  use Zohyothanksgiving.Web, :controller
 
-  alias Zohyohtanksgiving.Question
-  alias Zohyohtanksgiving.ProposedQuestion
+  alias Zohyothanksgiving.Question
+  alias Zohyothanksgiving.ProposedQuestion
 
   plug :scrub_params, "question" when action in [:create, :update]
 
@@ -82,7 +82,7 @@ defmodule Zohyohtanksgiving.QuestionController do
     Repo.delete_all(from(c in ProposedQuestion, where: c.question_id == ^id))
     proposed_question = Ecto.Model.build(question, :proposed_question)
     Repo.insert!(proposed_question)
-    Zohyohtanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{"question_body" => question.body}
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{"question_body" => question.body}
     conn
     |> put_flash(:info, "問題を公開しました")
     |> redirect(to: question_path(conn, :index))

@@ -1,5 +1,5 @@
-defmodule Zohyohtanksgiving.PageControllerTest do
-  use Zohyohtanksgiving.ConnCase
+defmodule Zohyothanksgiving.PageControllerTest do
+  use Zohyothanksgiving.ConnCase
 
   test "GET /" do
     conn = get conn(), "/"

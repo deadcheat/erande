@@ -1,5 +1,5 @@
-defmodule Zohyohtanksgiving.Router do
-  use Zohyohtanksgiving.Web, :router
+defmodule Zohyothanksgiving.Router do
+  use Zohyothanksgiving.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule Zohyohtanksgiving.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Zohyohtanksgiving do
+  scope "/", Zohyothanksgiving do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -26,7 +26,7 @@ defmodule Zohyohtanksgiving.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Zohyohtanksgiving do
+  # scope "/api", Zohyothanksgiving do
   #   pipe_through :api
   # end
 end

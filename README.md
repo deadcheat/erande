@@ -1,4 +1,4 @@
-# Zohyohtanksgiving
+# Zohyothanksgiving
 
 To start your Phoenix app:
 

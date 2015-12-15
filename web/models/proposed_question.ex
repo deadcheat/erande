@@ -1,8 +1,8 @@
-defmodule Zohyohtanksgiving.ProposedQuestion do
-  use Zohyohtanksgiving.Web, :model
+defmodule Zohyothanksgiving.ProposedQuestion do
+  use Zohyothanksgiving.Web, :model
 
   schema "proposed_questions" do
-    belongs_to :question, Zohyohtanksgiving.Question
+    belongs_to :question, Zohyothanksgiving.Question
 
     timestamps
   end

@@ -1,3 +1,3 @@
-defmodule Zohyohtanksgiving.LayoutView do
-  use Zohyohtanksgiving.Web, :view
+defmodule Zohyothanksgiving.LayoutView do
+  use Zohyothanksgiving.Web, :view
 end

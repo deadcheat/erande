@@ -1,14 +1,14 @@
 ## ---------------------------
 ## 解答選択肢に関連するRESTコントローラー
 ## ---------------------------
-defmodule Zohyohtanksgiving.SolutionController do
-  use Zohyohtanksgiving.Web, :controller
+defmodule Zohyothanksgiving.SolutionController do
+  use Zohyothanksgiving.Web, :controller
 
   require Logger
 
-  alias Zohyohtanksgiving.Solution
-  alias Zohyohtanksgiving.Question
-  alias Zohyohtanksgiving.Collectanswer
+  alias Zohyothanksgiving.Solution
+  alias Zohyothanksgiving.Question
+  alias Zohyothanksgiving.Collectanswer
 
   plug :scrub_params, "solution" when action in [:create, :update]
 
