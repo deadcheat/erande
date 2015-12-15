@@ -36,7 +36,7 @@ defmodule Zohyohtanksgiving.SolutionController do
         |> put_flash(:info, "Solution created successfully.")
         |> redirect(to: question_solution_path(conn, :index, solution.question_id))
       {:error, changeset} ->
-        render(conn, "new.html", question_id: solution_params.question_id, changeset: changeset)
+        render(conn, "new.html", question_id: solution_params["question_id"], changeset: changeset)
     end
   end
 
@@ -84,23 +84,23 @@ defmodule Zohyohtanksgiving.SolutionController do
   ## ---------------------------
   ## 選択した選択肢を正答としてマーク
   ## ---------------------------
-  def mark(conn, %{"id" => id}) do
+  def mark(conn, %{"id" => id, "question_id" => question_id}) do
     solution = Repo.get!(Solution, id)
     collectanswer = Ecto.Model.build(solution, :collectanswer, question_id: solution.question_id)
     Repo.insert!(collectanswer)
     conn
     |> put_flash(:info, "solution marked successfully.")
-    |> redirect(to: question_solution_path(conn, :index, solution.question_id))
+    |> redirect(to: question_solution_path(conn, :index, question_id))
   end
 
   ## ---------------------------
   ## 選択した選択肢の正答マークを削除
   ## ---------------------------
-  def unmark(conn, %{"id" => id}) do
+  def unmark(conn, %{"id" => id, "question_id" => question_id}) do
     solution = Repo.get!(Solution, id)
     Repo.delete_all(from(c in Collectanswer, where: c.solution_id == ^id))
     conn
     |> put_flash(:info, "solution unmarked successfully.")
-    |> redirect(to: question_solution_path(conn, :index, solution.question_id))
+    |> redirect(to: question_solution_path(conn, :index, question_id))
   end
 end

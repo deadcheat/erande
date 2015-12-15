@@ -33,9 +33,9 @@
 
       <td class="text-right">
         <%= if is_nil(solution.collectanswer) do %>
-          <%= link "Mark", to: solution_path(@conn, :mark, solution), class: "btn btn-default btn-xs" %>
+          <%= link "Mark", to: question_solution_path(@conn, :mark, @question_id, solution), class: "btn btn-default btn-xs" %>
         <%= else %>
-          <%= link "UnMark", to: solution_path(@conn, :unmark, solution), class: "btn btn-default btn-xs red" %>
+          <%= link "UnMark", to: question_solution_path(@conn, :unmark, @question_id, solution), class: "btn btn-default btn-xs red" %>
         <%= end %>
         <%= link "Show", to: question_solution_path(@conn, :show, @question_id, solution), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: question_solution_path(@conn, :edit, @question_id, solution), class: "btn btn-default btn-xs" %>

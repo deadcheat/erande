@@ -3,6 +3,7 @@ defmodule Zohyohtanksgiving.UserSocket do
 
   ## Channels
   # channel "rooms:*", Zohyohtanksgiving.RoomChannel
+  channel "rooms:lobby", Zohyohtanksgiving.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
