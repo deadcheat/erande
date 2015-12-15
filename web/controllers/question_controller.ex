@@ -1,20 +1,27 @@
+## ----------------------
+## 問題管理コントローラー
+## ----------------------
 defmodule Zohyohtanksgiving.QuestionController do
   use Zohyohtanksgiving.Web, :controller
 
   alias Zohyohtanksgiving.Question
+  alias Zohyohtanksgiving.ProposedQuestion
 
   plug :scrub_params, "question" when action in [:create, :update]
 
+  # get /questions/
   def index(conn, _params) do
-    questions = Repo.all(Question)
+    questions = Repo.all(from(q in Question, preload: :proposed_question))
     render(conn, "index.html", questions: questions)
   end
 
+  # get /questions/new
   def new(conn, _params) do
     changeset = Question.changeset(%Question{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  # post /questions/
   def create(conn, %{"question" => question_params}) do
     changeset = Question.changeset(%Question{}, question_params)
 
@@ -28,17 +35,20 @@ defmodule Zohyohtanksgiving.QuestionController do
     end
   end
 
+  # get /questions/:id
   def show(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
     render(conn, "show.html", question: question)
   end
 
+  # get /questions/:id/edit
   def edit(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
     changeset = Question.changeset(question)
     render(conn, "edit.html", question: question, changeset: changeset)
   end
 
+  # put /questions/:id
   def update(conn, %{"id" => id, "question" => question_params}) do
     question = Repo.get!(Question, id)
     changeset = Question.changeset(question, question_params)
@@ -53,6 +63,7 @@ defmodule Zohyohtanksgiving.QuestionController do
     end
   end
 
+  # delete /questions/:id
   def delete(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
 
@@ -62,6 +73,18 @@ defmodule Zohyohtanksgiving.QuestionController do
 
     conn
     |> put_flash(:info, "Question deleted successfully.")
+    |> redirect(to: question_path(conn, :index))
+  end
+
+  # 問題公開
+  def propose_question(conn, %{"id" => id}) do
+    question = Repo.get!(Question, id)
+    Repo.delete_all(from(c in ProposedQuestion, where: c.question_id == ^id))
+    proposed_question = Ecto.Model.build(question, :proposed_question)
+    Repo.insert!(proposed_question)
+    Zohyohtanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{"question_body" => question.body}
+    conn
+    |> put_flash(:info, "問題を公開しました")
     |> redirect(to: question_path(conn, :index))
   end
 end

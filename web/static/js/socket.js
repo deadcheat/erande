@@ -57,6 +57,7 @@ socket.connect()
 let channel = socket.channel("rooms:lobby", {})
 let chatInput         = $("#chat-input")
 let messagesContainer = $("#messages")
+let testee = $("#test")
 
 chatInput.on("keypress", event => {
   if(event.keyCode === 13){
@@ -67,6 +68,11 @@ chatInput.on("keypress", event => {
 
 channel.on("new_msg", payload => {
   messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
+})
+
+channel.on("proposed", payload => {
+  testee.empty()
+  testee.append(`${payload.question_body}`)
 })
 
 channel.join()

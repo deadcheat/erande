@@ -1,17 +1,13 @@
-defmodule Zohyohtanksgiving.Question do
+defmodule Zohyohtanksgiving.ProposedQuestion do
   use Zohyohtanksgiving.Web, :model
 
-  schema "questions" do
-    field :title, :string
-    field :body, :string
+  schema "proposed_questions" do
+    belongs_to :question, Zohyohtanksgiving.Question
 
-    has_one  :proposed_question, Zohyohtanksgiving.ProposedQuestion
-    has_many :solutions, Zohyohtanksgiving.Solution
-    has_many :collectanswers, Zohyohtanksgiving.Collectanswer
     timestamps
   end
 
-  @required_fields ~w(title body)
+  @required_fields ~w(question_id)
   @optional_fields ~w()
 
   @doc """

@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>出題中</th>
       <th>タイトル</th>
       <th>問題文</th>
 
@@ -12,14 +13,20 @@
   <tbody>
 <%= for question <- @questions do %>
     <tr>
+      <td>
+        <%= if !is_nil(question.proposed_question) do %>
+          <font class="badge">出題中</font>
+        <%= end %>
+      </td>
       <td><%= question.title %></td>
       <td><%= question.body %></td>
 
       <td class="text-right">
-        <%= link "solutions", to: question_solution_path(@conn, :index, question), class: "btn btn-default btn-xs" %>
-        <%= link "Show", to: question_path(@conn, :show, question), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: question_path(@conn, :edit, question), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: question_path(@conn, :delete, question), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "出題", to: question_path(@conn, :propose_question, question), class: "btn btn-default btn-xs" %>
+        <%= link "一覧", to: question_solution_path(@conn, :index, question), class: "btn btn-default btn-xs" %>
+        <%= link "詳細", to: question_path(@conn, :show, question), class: "btn btn-default btn-xs" %>
+        <%= link "編集", to: question_path(@conn, :edit, question), class: "btn btn-default btn-xs" %>
+        <%= link "削除", to: question_path(@conn, :delete, question), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
