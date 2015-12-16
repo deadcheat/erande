@@ -1,36 +1,43 @@
-<div id="test" class="jumbotron">
-  <h2>Welcome to Phoenix!</h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<div id="thanksgiving">
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card blue darken-1">
+        <div class="card-content grey-text text-lighten-3">
+          <span class="card-title">問題</span>
+          <p  id="test" class="flow-text">問題文がここに入ります</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+  <div class="row">
+    <div class="col s12 m12">
+      <ul class="collection">
+        <li class="collection-item avatar">
+          <a href="#">
+            <i class="material-icons circle red">A</i>
+            <h5>解答</h5>
+          </a>
+        </li>
+        <li class="collection-item avatar">
+          <a href="#">
+            <i class="material-icons circle green">B</i>
+            <h5>解答</h5>
+          </a>
+        </li>
+        <li class="collection-item avatar">
+          <a href="#">
+            <i class="material-icons circle blue">C</i>
+            <h5>解答</h5>
+          </a>
+        </li>
+        <li class="collection-item avatar">
+          <a href="#">
+            <i class="material-icons circle yellow black-text">D</i>
+            <h5>解答</h5>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
