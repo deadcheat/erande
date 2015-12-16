@@ -108,14 +108,18 @@ defmodule Zohyothanksgiving.QuestionController do
 
   # アンサーチェック！
   def answercheck(conn, %{"id" => id}) do
-    query  = from s in Solution,
-                 left_join: a in Answer, on: a.solution_id == s.id,
-                 where: s.question_id == ^id,
-                 group_by: s.id,
-                 select: {s.id, count(a.id)}
-    answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
-    IO.inspect answers, pretty: true
+    proposed_questions = Repo.all Zohyothanksgiving.ProposedQuestion
+    if length(proposed_questions) == 1 do
+      [proposed_question] = proposed_questions
+      query  = from s in Solution,
+                   left_join: a in Answer, on: a.solution_id == s.id,
+                   where: s.question_id == ^proposed_question.id,
+                   group_by: s.id,
+                   select: {s.id, count(a.id)}
+      answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
+      Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
+      IO.inspect answers, pretty: true
+    end
     conn
     |> put_flash(:info, "問題画面に解答状況を反映しました")
     |> redirect(to: question_path(conn, :show, id))
@@ -126,6 +130,14 @@ defmodule Zohyothanksgiving.QuestionController do
     Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answeropen", %{}
     conn
     |> put_flash(:info, "問題画面に解答を反映しました")
-    |> redirect(to: question_path(conn, :show, id))
+    |> redirect(to: question_path(conn, :index))
+  end
+
+  # 回答データをリセット
+  def answerclean(conn, _param) do
+    Repo.delete_all(Answer)
+    conn
+    |> put_flash(:info, "回答データを消去しました")
+    |> redirect(to: question_path(conn, :index))
   end
 end

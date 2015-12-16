@@ -34,3 +34,4 @@
 </table>
 
 <%= link "New question", to: question_path(@conn, :new) %>
+<%= link "回答データのリセット", to: question_path(@conn, :answerclean) %>

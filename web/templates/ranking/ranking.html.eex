@@ -1,0 +1,19 @@
+<h2>ランキング</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th>名前</th>
+    <th>正解数</th>
+  </tr>
+  </thead>
+  <tbody>
+    <%= for ranker <- @ranking do %>
+    <tr>
+      <td><%= ranker.name %></td>
+      <td><%= ranker.count %></td>
+
+    </tr>
+    <%= end %>
+  </tbody>
+</table>
+<%= link "問題一覧に戻る", to: question_path(@conn, :index) %>

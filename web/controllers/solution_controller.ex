@@ -4,8 +4,6 @@
 defmodule Zohyothanksgiving.SolutionController do
   use Zohyothanksgiving.Web, :controller
 
-  require Logger
-
   alias Zohyothanksgiving.Solution
   alias Zohyothanksgiving.Question
   alias Zohyothanksgiving.Collectanswer
@@ -16,7 +14,6 @@ defmodule Zohyothanksgiving.SolutionController do
   def index(conn, %{"question_id" => question_id}) do
     question = Repo.get(Question, question_id)
     solutions = Repo.all(from(s in Solution, where: s.question_id == ^question_id, preload: :collectanswer))
-    Logger.debug inspect(solutions, pretty: true)
     render(conn, "index.html", question_id: question_id, solutions: solutions, question: question)
   end
 

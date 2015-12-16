@@ -17,6 +17,8 @@ defmodule Zohyothanksgiving.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/ranking/", RankingController, :ranking
+    get "/questions/answerclean", QuestionController, :answerclean
     resources "/questions", QuestionController do
       resources "/solutions", SolutionController
       get "/solutions/:id/mark", SolutionController, :mark
