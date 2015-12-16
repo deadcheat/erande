@@ -14,5 +14,14 @@
 
 </ul>
 
+<h3>コントロールパネル</h3>
+
+<ul>
+  <li><%= link "出題", to: question_path(@conn, :propose_question, @question), class: "btn btn-default btn-xs" %></li>
+  <br>
+  <li><%= link "取り消し", to: question_path(@conn, :unpropose, @question), class: "btn btn-default btn-xs" %></li>
+</ul>
+
+
 <%= link "Edit", to: question_path(@conn, :edit, @question) %>
 <%= link "Back", to: question_path(@conn, :index) %>

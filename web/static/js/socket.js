@@ -57,26 +57,73 @@ socket.connect()
 let channel = socket.channel("rooms:lobby", {})
 let chatInput         = $("#chat-input")
 let messagesContainer = $("#messages")
-let testee = $("#test")
+let question = $("#question")
+let answers = []
 
 chatInput.on("keypress", event => {
   if(event.keyCode === 13){
-  channel.push("new_msg", {body: chatInput.val()})
-  chatInput.val("")
-}
-})
-
-channel.on("new_msg", payload => {
-  messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
+    channel.push("new_msg", {body: chatInput.val()})
+    chatInput.val("")
+  }
 })
 
 channel.on("proposed", payload => {
-  testee.empty()
-  testee.append(`${payload.question_body}`)
+  answers = []
+  $.each([0,1,2,3], function(index) {
+    var solution_anchor = $("#answer-"+index);
+    solution_anchor.empty()
+  })
+  question.empty()
+  question.append(`${payload.question_body}`)
+  $.each(payload.solutions, function(i, solution){
+    var solution_anchor = $("#answer-"+i);
+    solution_anchor.empty()
+    solution_anchor.append(solution.body)
+    var line = $("li#line-answer-"+i)
+    line.on("click", function(event) {
+      if ($('.disabled').length) {
+        return false
+      }
+      console.log("push answer ", solution.id, " by " + $("#username").val())
+      $(this).addClass('orange')
+      $.each([0,1,2,3], function(index) {
+        $("li#line-answer-"+i).addClass("disabled")
+      })
+    })
+    if (solution.correct === true) {
+      answers.push(i)
+    }
+  })
 })
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => {
+    answers = []
+    question.empty()
+    question.append(resp.question_body)
+    $.each(resp.solutions, function(i, solution){
+      var solution_anchor = $("#answer-"+i);
+      solution_anchor.empty()
+      solution_anchor.append(solution.body)
+      var line = $("li#line-answer-"+i)
+      line.on("click", function(event) {
+        if ($('.disabled').length) {
+          return false
+        }
+        console.log("push answer ", solution.id, " by " + $("#username").val())
+        $(this).addClass('orange')
+        $.each([0,1,2,3], function(index) {
+          $("li#line-answer-"+i).addClass("disabled")
+        })
+      })
+      if (solution.correct === true) {
+        answers.push(i)
+      }
+    })
+    console.log("Joined successfully", resp)
+
+  })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
 
 export default socket

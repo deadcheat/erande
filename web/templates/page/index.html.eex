@@ -4,37 +4,37 @@
       <div class="card blue darken-1">
         <div class="card-content grey-text text-lighten-3">
           <span class="card-title">問題</span>
-          <p  id="test" class="flow-text">問題文がここに入ります</p>
+          <p  id="question" class="flow-text">問題文がここに入ります</p>
         </div>
       </div>
     </div>
   </div>
-
+  <input id="username" type="text" name="name" placeholder="ここにお名前を入力していただくと、多分集計できます">
   <div class="row">
     <div class="col s12 m12">
       <ul class="collection">
-        <li class="collection-item avatar">
+        <li id="line-answer-0" class="collection-item avatar">
           <a href="#">
             <i class="material-icons circle red">A</i>
-            <h5>解答</h5>
+            <h5 id="answer-0"></h5>
           </a>
         </li>
-        <li class="collection-item avatar">
+        <li id="line-answer-1" class="collection-item avatar">
           <a href="#">
             <i class="material-icons circle green">B</i>
-            <h5>解答</h5>
+            <h5 id="answer-1"></h5>
           </a>
         </li>
-        <li class="collection-item avatar">
+        <li id="line-answer-2" class="collection-item avatar">
           <a href="#">
             <i class="material-icons circle blue">C</i>
-            <h5>解答</h5>
+            <h5 id="answer-2"></h5>
           </a>
         </li>
-        <li class="collection-item avatar">
+        <li id="line-answer-3" class="collection-item avatar">
           <a href="#">
             <i class="material-icons circle yellow black-text">D</i>
-            <h5>解答</h5>
+            <h5 id="answer-3"></h5>
           </a>
         </li>
       </ul>

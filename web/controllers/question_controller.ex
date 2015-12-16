@@ -79,12 +79,26 @@ defmodule Zohyothanksgiving.QuestionController do
   # 問題公開
   def propose_question(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-    Repo.delete_all(from(c in ProposedQuestion, where: c.question_id == ^id))
+               |> Repo.preload :solutions
+    Repo.delete_all(ProposedQuestion)
     proposed_question = Ecto.Model.build(question, :proposed_question)
     Repo.insert!(proposed_question)
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{"question_body" => question.body}
+    solutions = Repo.preload question.solutions, :collectanswer
+    rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
+    IO.inspect rs_solutions, pretty: true
+
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: question.id, question_body: question.body, solutions: rs_solutions}
     conn
     |> put_flash(:info, "問題を公開しました")
+    |> redirect(to: question_path(conn, :show, id))
+  end
+
+  # 問題取り消し
+  def unpropose(conn, %{"id" => id}) do
+    Repo.delete_all(ProposedQuestion)
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_body: "出題待ち", solutions: []}
+    conn
+    |> put_flash(:info, "問題を取り消ししました")
     |> redirect(to: question_path(conn, :index))
   end
 end

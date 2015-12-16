@@ -23,6 +23,7 @@ defmodule Zohyothanksgiving.Router do
       get "/solutions/:id/unmark", SolutionController, :unmark
     end
     get "/questions/:id/propose", QuestionController, :propose_question
+    get "/questions/:id/unpropose", QuestionController, :unpropose
   end
 
   # Other scopes may use custom stacks.
