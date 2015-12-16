@@ -4,8 +4,9 @@ defmodule Zohyothanksgiving.RoomChannel do
   def join("rooms:lobby", payload, socket) do
     if authorized?(payload) do
       proposed_questions = Repo.all Zohyothanksgiving.ProposedQuestion
-      if is_nil proposed_questions do
-        {:ok, %{question_id: 0, question_body: "出題待ち", solutions: []}, socket}
+      IO.inspect proposed_questions, pretty: true
+      if length(proposed_questions) == 0 do
+        {:ok, %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}, socket}
       else
         [proposed_question] = Repo.preload proposed_questions, :question
         question = Repo.preload proposed_question.question, :solutions
@@ -13,7 +14,7 @@ defmodule Zohyothanksgiving.RoomChannel do
         rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
         IO.inspect rs_solutions, pretty: true
 
-        {:ok, %{question_id: question.id, question_body: question.body, solutions: rs_solutions}, socket}
+        {:ok, %{question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}, socket}
       end
     else
       {:error, %{reason: "unauthorized"}}
@@ -35,6 +36,16 @@ defmodule Zohyothanksgiving.RoomChannel do
 
   def handle_in("new_msg", %{"body" => body}, socket) do
     broadcast! socket, "new_msg", %{body: body}
+    {:noreply, socket}
+  end
+
+  def handle_in("answer", %{"name" => name, "solution_id" => solution_id}, socket) do
+    Repo.insert!(
+      %Zohyothanksgiving.Answer{
+        solution_id: solution_id,
+        respondent: name
+      }
+    )
     {:noreply, socket}
   end
 

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>雑兵大感謝祭</title>
+    <title>オール雑兵大感謝祭</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
@@ -22,7 +22,7 @@
     <div class="container" role="main">
       <nav>
         <div class="nav-wrapper">
-          <label class="brand-logo">&nbsp;&nbsp;雑兵！大感謝祭！！</label>
+          <label class="brand-logo">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</label>
         </div>
       </nav>
 

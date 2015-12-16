@@ -5,6 +5,8 @@ defmodule Zohyothanksgiving.QuestionController do
   use Zohyothanksgiving.Web, :controller
 
   alias Zohyothanksgiving.Question
+  alias Zohyothanksgiving.Solution
+  alias Zohyothanksgiving.Answer
   alias Zohyothanksgiving.ProposedQuestion
 
   plug :scrub_params, "question" when action in [:create, :update]
@@ -38,7 +40,9 @@ defmodule Zohyothanksgiving.QuestionController do
   # get /questions/:id
   def show(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-    render(conn, "show.html", question: question)
+    solutions = Repo.all(from(s in Solution, where: s.question_id == ^question.id, preload: :collectanswer))
+    IO.inspect question, pretty: true
+    render(conn, "show.html", question: question, solutions: solutions)
   end
 
   # get /questions/:id/edit
@@ -87,7 +91,7 @@ defmodule Zohyothanksgiving.QuestionController do
     rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
     IO.inspect rs_solutions, pretty: true
 
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: question.id, question_body: question.body, solutions: rs_solutions}
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}
     conn
     |> put_flash(:info, "問題を公開しました")
     |> redirect(to: question_path(conn, :show, id))
@@ -96,9 +100,32 @@ defmodule Zohyothanksgiving.QuestionController do
   # 問題取り消し
   def unpropose(conn, %{"id" => id}) do
     Repo.delete_all(ProposedQuestion)
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_body: "出題待ち", solutions: []}
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}
     conn
     |> put_flash(:info, "問題を取り消ししました")
     |> redirect(to: question_path(conn, :index))
+  end
+
+  # アンサーチェック！
+  def answercheck(conn, %{"id" => id}) do
+    query  = from s in Solution,
+                 left_join: a in Answer, on: a.solution_id == s.id,
+                 where: s.question_id == ^id,
+                 group_by: s.id,
+                 select: {s.id, count(a.id)}
+    answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
+    IO.inspect answers, pretty: true
+    conn
+    |> put_flash(:info, "問題画面に解答状況を反映しました")
+    |> redirect(to: question_path(conn, :show, id))
+  end
+
+  # アンサーオープン
+  def answeropen(conn, %{"id" => id}) do
+    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answeropen", %{}
+    conn
+    |> put_flash(:info, "問題画面に解答を反映しました")
+    |> redirect(to: question_path(conn, :show, id))
   end
 end

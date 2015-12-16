@@ -55,69 +55,101 @@ socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("rooms:lobby", {})
-let chatInput         = $("#chat-input")
-let messagesContainer = $("#messages")
 let question = $("#question")
-let answers = []
+let question_title = $("#question-title")
+let answers_index = []
 
-chatInput.on("keypress", event => {
-  if(event.keyCode === 13){
-    channel.push("new_msg", {body: chatInput.val()})
-    chatInput.val("")
-  }
+channel.on("answercheck", payload => {
+  console.log("answercheck", payload)
+  $.each([0,1,2,3], function(index) {
+    var line = $("li#line-answer-"+index)
+    line.addClass("disabled")
+    line.removeClass("light-green")
+    line.removeClass("orange")
+  })
+  $.each(payload.answers, function(i, answer) {
+    var counter = $("#answer-count-"+i)
+    counter.empty()
+    counter.append(answer.count)
+  })
+})
+
+channel.on("answeropen", payload => {
+  console.log("answeropen", payload)
+  $.each([0,1,2,3], function(index) {
+    var line = $("li#line-answer-"+index)
+    line.removeClass("light-green")
+    line.removeClass("orange")
+  })
+  $.each(answers_index, function(answer_index) {
+    var line = $("li#line-answer-"+answer_index)
+    line.addClass('orange')
+  })
 })
 
 channel.on("proposed", payload => {
-  answers = []
+  answers_index = []
   $.each([0,1,2,3], function(index) {
-    var solution_anchor = $("#answer-"+index);
+    var solution_anchor = $("#answer-"+index)
     solution_anchor.empty()
+    var line = $("li#line-answer-"+index)
+    line.removeClass("disabled")
+    line.removeClass("light-green")
+    line.removeClass("orange")
   })
+  question_title.empty()
+  question_title.append(payload.question_title)
   question.empty()
-  question.append(`${payload.question_body}`)
+  question.append(payload.question_body)
   $.each(payload.solutions, function(i, solution){
-    var solution_anchor = $("#answer-"+i);
+    var solution_anchor = $("#answer-"+i)
     solution_anchor.empty()
     solution_anchor.append(solution.body)
     var line = $("li#line-answer-"+i)
     line.on("click", function(event) {
+      var name = $("#username").val()
       if ($('.disabled').length) {
         return false
       }
-      console.log("push answer ", solution.id, " by " + $("#username").val())
-      $(this).addClass('orange')
+      console.log("push answer ", solution.id, " by " + name)
+      channel.push("answer", {name: name, slution_id: solution.id})
+      $(this).addClass('light-green')
       $.each([0,1,2,3], function(index) {
-        $("li#line-answer-"+i).addClass("disabled")
+        $("li#line-answer-"+index).addClass("disabled")
       })
     })
     if (solution.correct === true) {
-      answers.push(i)
+      answers_index.push(i)
     }
   })
 })
 
 channel.join()
   .receive("ok", resp => {
-    answers = []
+    answers_index = []
     question.empty()
     question.append(resp.question_body)
+    question_title.empty()
+    question_title.append(resp.question_title)
     $.each(resp.solutions, function(i, solution){
-      var solution_anchor = $("#answer-"+i);
+      var solution_anchor = $("#answer-"+i)
       solution_anchor.empty()
       solution_anchor.append(solution.body)
       var line = $("li#line-answer-"+i)
       line.on("click", function(event) {
+        var name = $("#username").val()
         if ($('.disabled').length) {
           return false
         }
-        console.log("push answer ", solution.id, " by " + $("#username").val())
-        $(this).addClass('orange')
+        console.log("push answer ", solution.id, " by " + name)
+        channel.push("answer", {name: name, solution_id: solution.id})
+        $(this).addClass('light-green')
         $.each([0,1,2,3], function(index) {
           $("li#line-answer-"+i).addClass("disabled")
         })
       })
       if (solution.correct === true) {
-        answers.push(i)
+        answers_index.push(i)
       }
     })
     console.log("Joined successfully", resp)

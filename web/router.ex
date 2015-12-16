@@ -24,6 +24,8 @@ defmodule Zohyothanksgiving.Router do
     end
     get "/questions/:id/propose", QuestionController, :propose_question
     get "/questions/:id/unpropose", QuestionController, :unpropose
+    get "/questions/:id/answercheck", QuestionController, :answercheck
+    get "/questions/:id/answeropen", QuestionController, :answeropen
   end
 
   # Other scopes may use custom stacks.

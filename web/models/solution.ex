@@ -6,6 +6,7 @@ defmodule Zohyothanksgiving.Solution do
 
     belongs_to :question, Zohyothanksgiving.Question, foreign_key: :question_id
     has_one :collectanswer, Zohyothanksgiving.Collectanswer
+    has_many :answers, Zohyothanksgiving.Answer
     timestamps
   end
 

@@ -3,7 +3,7 @@
     <div class="col s12 m12">
       <div class="card blue darken-1">
         <div class="card-content grey-text text-lighten-3">
-          <span class="card-title">問題</span>
+          <span id="question-title" class="card-title">問題</span>
           <p  id="question" class="flow-text">問題文がここに入ります</p>
         </div>
       </div>
@@ -14,28 +14,24 @@
     <div class="col s12 m12">
       <ul class="collection">
         <li id="line-answer-0" class="collection-item avatar">
-          <a href="#">
-            <i class="material-icons circle red">A</i>
-            <h5 id="answer-0"></h5>
-          </a>
+          <i class="material-icons circle red">A</i>
+          <h5 id="answer-0" class="col s11"></h5>
+          <h5 id="answer-count-0" class="col s1"></h5>
         </li>
         <li id="line-answer-1" class="collection-item avatar">
-          <a href="#">
-            <i class="material-icons circle green">B</i>
-            <h5 id="answer-1"></h5>
-          </a>
+          <i class="material-icons circle green">B</i>
+          <h5 id="answer-1" class="col s11"></h5>
+          <h5 id="answer-count-1" class="col s1"></h5>
         </li>
         <li id="line-answer-2" class="collection-item avatar">
-          <a href="#">
-            <i class="material-icons circle blue">C</i>
-            <h5 id="answer-2"></h5>
-          </a>
+          <i class="material-icons circle blue">C</i>
+          <h5 id="answer-2" class="col s11"></h5>
+          <h5 id="answer-count-2" class="col s1"></h5>
         </li>
         <li id="line-answer-3" class="collection-item avatar">
-          <a href="#">
-            <i class="material-icons circle yellow black-text">D</i>
-            <h5 id="answer-3"></h5>
-          </a>
+          <i class="material-icons circle yellow black-text">D</i>
+          <h5 id="answer-3" class="col s11"></h5>
+          <h5 id="answer-count-3" class="col s1"></h5>
         </li>
       </ul>
     </div>

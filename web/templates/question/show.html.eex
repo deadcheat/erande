@@ -14,12 +14,46 @@
 
 </ul>
 
+<h2>解答一覧</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th>正答？</th>
+    <th>文章</th>
+
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= for solution <- @solutions do %>
+  <tr>
+    <td>
+      <%= if !is_nil(solution.collectanswer) do %>
+      <font class="badge">正答</font>
+      <%= end %>
+    </td>
+    <td>
+      <%= solution.body %>
+    </td>
+
+    <td class="text-right">
+      <span id="count-<%= solution.id %>">0</span>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <h3>コントロールパネル</h3>
 
 <ul>
   <li><%= link "出題", to: question_path(@conn, :propose_question, @question), class: "btn btn-default btn-xs" %></li>
   <br>
   <li><%= link "取り消し", to: question_path(@conn, :unpropose, @question), class: "btn btn-default btn-xs" %></li>
+  <br>
+  <li><%= link "アンサーチェック！", to: question_path(@conn, :answercheck, @question), class: "btn btn-default btn-xs" %></li>
+  <br>
+  <li><%= link "正解オープン", to: question_path(@conn, :answeropen, @question), class: "btn btn-default btn-xs" %></li>
 </ul>
 
 
