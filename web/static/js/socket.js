@@ -131,12 +131,14 @@ channel.join()
     answers_index = []
     question.empty()
     question_title.empty()
-    if (resp.status !== 'waiting') {
+    question.append(resp.question_body)
+    question_title.append(resp.question_title)
+    if (resp.status === 'dead') {
       console.log("Joined successfully, but waiting", resp)
+      question.empty()
+      question_title.empty()
       question_title.append("次の問題から参加できます")
     } else {
-      question.append(resp.question_body)
-      question_title.append(resp.question_title)
       $.each(resp.solutions, function(i, solution){
         var solution_anchor = $("#answer-"+i)
         solution_anchor.empty()
