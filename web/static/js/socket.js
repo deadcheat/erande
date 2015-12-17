@@ -92,6 +92,8 @@ channel.on("proposed", payload => {
   $.each([0,1,2,3], function(index) {
     var solution_anchor = $("#answer-"+index)
     solution_anchor.empty()
+    var counter = $("#answer-count-"+index)
+    counter.empty()
     var line = $("li#line-answer-"+index)
     line.removeClass("disabled")
     line.removeClass("light-green")
