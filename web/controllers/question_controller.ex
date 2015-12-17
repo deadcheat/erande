@@ -130,7 +130,7 @@ defmodule Zohyothanksgiving.QuestionController do
     Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answeropen", %{}
     conn
     |> put_flash(:info, "問題画面に解答を反映しました")
-    |> redirect(to: question_path(conn, :index))
+    |> redirect(to: question_path(conn, :show, id))
   end
 
   # 回答データをリセット

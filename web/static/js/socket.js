@@ -81,8 +81,8 @@ channel.on("answeropen", payload => {
     line.removeClass("light-green")
     line.removeClass("orange")
   })
-  $.each(answers_index, function(answer_index) {
-    var line = $("li#line-answer-"+answer_index)
+  $.each(answers_index, function() {
+    var line = $("li#line-answer-"+this)
     line.addClass('orange')
   })
 })
