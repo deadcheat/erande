@@ -27,7 +27,6 @@ defmodule Zohyothanksgiving.RoomChannel do
   end
 
   def handle_in("answer", %{"name" => name, "solution_id" => solution_id}, socket) do
-    Logger.info(IO.inspect %{"name" => name, "solution_id" => solution_id}, pretty: true)
     check = Repo.all(from(a in Answer, where: a.respondent == ^name and a.solution_id == ^solution_id))
 
     if length(check) == 0 do
