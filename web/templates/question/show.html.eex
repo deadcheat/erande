@@ -21,7 +21,6 @@
     <th>正答？</th>
     <th>文章</th>
 
-    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -36,9 +35,6 @@
       <%= solution.body %>
     </td>
 
-    <td class="text-right">
-      <span id="count-<%= solution.id %>">0</span>
-    </td>
   </tr>
   <% end %>
   </tbody>

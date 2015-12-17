@@ -1,6 +1,7 @@
 defmodule Zohyothanksgiving.RoomChannel do
   use Zohyothanksgiving.Web, :channel
 
+  alias Zohyothanksgiving.Solution
   alias Zohyothanksgiving.Answer
 
   def join("rooms:lobby", payload, socket) do
@@ -11,7 +12,7 @@ defmodule Zohyothanksgiving.RoomChannel do
         {:ok, %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}, socket}
       else
         [proposed_question] = Repo.preload proposed_questions, :question
-        question = Repo.preload proposed_question.question, :solutions
+        question = Repo.preload proposed_question.question, solutions: from(s in Solution, order_by: s.id)
         solutions = Repo.preload question.solutions, :collectanswer
         rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
         IO.inspect rs_solutions, pretty: true

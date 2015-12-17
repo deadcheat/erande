@@ -40,7 +40,7 @@ defmodule Zohyothanksgiving.QuestionController do
   # get /questions/:id
   def show(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-    solutions = Repo.all(from(s in Solution, where: s.question_id == ^question.id, preload: :collectanswer))
+    solutions = Repo.all(from(s in Solution, where: s.question_id == ^question.id, order_by: s.id, preload: :collectanswer))
     IO.inspect question, pretty: true
     render(conn, "show.html", question: question, solutions: solutions)
   end
@@ -83,7 +83,7 @@ defmodule Zohyothanksgiving.QuestionController do
   # 問題公開
   def propose_question(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-               |> Repo.preload :solutions
+               |> Repo.preload solutions: from(s in Solution, order_by: s.id)
     Repo.delete_all(ProposedQuestion)
     proposed_question = Ecto.Model.build(question, :proposed_question)
     Repo.insert!(proposed_question)

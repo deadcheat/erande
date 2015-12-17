@@ -13,7 +13,7 @@ defmodule Zohyothanksgiving.SolutionController do
   # get /questions/{question_id}/solutions/
   def index(conn, %{"question_id" => question_id}) do
     question = Repo.get(Question, question_id)
-    solutions = Repo.all(from(s in Solution, where: s.question_id == ^question_id, preload: :collectanswer))
+    solutions = Repo.all(from(s in Solution, where: s.question_id == ^question_id, order_by: s.id, preload: :collectanswer))
     render(conn, "index.html", question_id: question_id, solutions: solutions, question: question)
   end
 
