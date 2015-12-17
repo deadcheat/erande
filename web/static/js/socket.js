@@ -114,7 +114,7 @@ channel.on("proposed", payload => {
         return false
       }
       console.log("push answer ", solution.id, " by " + name)
-      channel.push("answer", {name: name, slution_id: solution.id})
+      channel.push("answer", {name: name, solution_id: solution.id})
       $(this).addClass('light-green')
       $.each([0,1,2,3], function(index) {
         $("li#line-answer-"+index).addClass("disabled")
