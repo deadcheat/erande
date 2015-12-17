@@ -1,6 +1,8 @@
 defmodule Zohyothanksgiving.RoomChannel do
   use Zohyothanksgiving.Web, :channel
 
+  alias Zohyothanksgiving.Answer
+
   def join("rooms:lobby", payload, socket) do
     if authorized?(payload) do
       proposed_questions = Repo.all Zohyothanksgiving.ProposedQuestion
@@ -40,12 +42,17 @@ defmodule Zohyothanksgiving.RoomChannel do
   end
 
   def handle_in("answer", %{"name" => name, "solution_id" => solution_id}, socket) do
-    Repo.insert!(
-      %Zohyothanksgiving.Answer{
-        solution_id: solution_id,
-        respondent: name
-      }
-    )
+    check = Repo.all(from(a in Answer, where: a.respondent == ^name and a.solution_id == ^solution_id))
+
+    if length(check) == 0 do
+      Repo.insert!(
+        %Answer{
+          solution_id: solution_id,
+          respondent: name
+        }
+      )
+    end
+
     {:noreply, socket}
   end
 

@@ -113,7 +113,7 @@ defmodule Zohyothanksgiving.QuestionController do
       [proposed_question] = proposed_questions
       query  = from s in Solution,
                    left_join: a in Answer, on: a.solution_id == s.id,
-                   where: s.question_id == ^proposed_question.id,
+                   where: s.question_id == ^proposed_question.question_id,
                    group_by: s.id,
                    select: {s.id, count(a.id)}
       answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
