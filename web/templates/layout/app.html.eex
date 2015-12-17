@@ -22,10 +22,8 @@
     <div class="container" role="main">
       <nav>
         <div class="nav-wrapper">
-          <label class="brand-logo">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</label>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><%= link "ランキング", to: ranking_path(@conn, :ranking) %></li>
-          </ul>
+          <a href="/" class="brand-logo hide-on-small-only">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</a>
+          <a href="/" class="brand-logo hide-on-med-and-up">&nbsp;&nbsp;オール雑兵大感謝祭</a>
         </div>
       </nav>
 

@@ -35,3 +35,4 @@
 
 <%= link "New question", to: question_path(@conn, :new) %>
 <%= link "回答データのリセット", to: question_path(@conn, :answerclean) %>
+<%= link "ランキング", to: ranking_path(@conn, :ranking) %>
