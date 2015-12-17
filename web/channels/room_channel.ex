@@ -19,7 +19,7 @@ defmodule Zohyothanksgiving.RoomChannel do
         rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
         IO.inspect rs_solutions, pretty: true
 
-        {:ok, %{question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}, socket}
+        {:ok, %{status: proposed_question.status,question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}, socket}
       end
     else
       {:error, %{reason: "unauthorized"}}

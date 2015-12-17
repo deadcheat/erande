@@ -85,7 +85,7 @@ defmodule Zohyothanksgiving.QuestionController do
     question = Repo.get!(Question, id)
                |> Repo.preload solutions: from(s in Solution, order_by: s.id)
     Repo.delete_all(ProposedQuestion)
-    proposed_question = Ecto.Model.build(question, :proposed_question)
+    proposed_question = Ecto.Model.build(question, :proposed_question, status: "waiting")
     Repo.insert!(proposed_question)
     solutions = Repo.preload question.solutions, :collectanswer
     rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
@@ -108,9 +108,11 @@ defmodule Zohyothanksgiving.QuestionController do
 
   # アンサーチェック！
   def answercheck(conn, %{"id" => id}) do
-    proposed_questions = Repo.all Zohyothanksgiving.ProposedQuestion
+    proposed_questions = Repo.all ProposedQuestion
     if length(proposed_questions) == 1 do
       [proposed_question] = proposed_questions
+      changeset = Ecto.Changeset.change proposed_question, status: "dead"
+      Repo.update!(changeset)
       query  = from s in Solution,
                    left_join: a in Answer, on: a.solution_id == s.id,
                    where: s.question_id == ^proposed_question.question_id,

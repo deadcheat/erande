@@ -2,6 +2,7 @@ defmodule Zohyothanksgiving.ProposedQuestion do
   use Zohyothanksgiving.Web, :model
 
   schema "proposed_questions" do
+    field :status, :string
     belongs_to :question, Zohyothanksgiving.Question
 
     timestamps

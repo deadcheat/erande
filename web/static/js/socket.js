@@ -130,32 +130,36 @@ channel.join()
   .receive("ok", resp => {
     answers_index = []
     question.empty()
-    question.append(resp.question_body)
     question_title.empty()
-    question_title.append(resp.question_title)
-    $.each(resp.solutions, function(i, solution){
-      var solution_anchor = $("#answer-"+i)
-      solution_anchor.empty()
-      solution_anchor.append(solution.body)
-      var line = $("li#line-answer-"+i)
-      line.on("click", function(event) {
-        var name = $("#username").val()
-        if ($('.disabled').length) {
-          return false
-        }
-        console.log("push answer ", solution.id, " by " + name)
-        channel.push("answer", {name: name, solution_id: solution.id})
-        $(this).addClass('light-green')
-        $.each([0,1,2,3], function(index) {
-          $("li#line-answer-"+i).addClass("disabled")
+    if (resp.status !== 'waiting') {
+      console.log("Joined successfully, but waiting", resp)
+      question_title.append("次の問題から参加できます")
+    } else {
+      question.append(resp.question_body)
+      question_title.append(resp.question_title)
+      $.each(resp.solutions, function(i, solution){
+        var solution_anchor = $("#answer-"+i)
+        solution_anchor.empty()
+        solution_anchor.append(solution.body)
+        var line = $("li#line-answer-"+i)
+        line.on("click", function(event) {
+          var name = $("#username").val()
+          if ($('.disabled').length) {
+            return false
+          }
+          console.log("push answer ", solution.id, " by " + name)
+          channel.push("answer", {name: name, solution_id: solution.id})
+          $(this).addClass('light-green')
+          $.each([0,1,2,3], function(index) {
+            $("li#line-answer-"+i).addClass("disabled")
+          })
         })
+        if (solution.correct === true) {
+          answers_index.push(i)
+        }
       })
-      if (solution.correct === true) {
-        answers_index.push(i)
-      }
-    })
-    console.log("Joined successfully", resp)
-
+      console.log("Joined successfully", resp)
+    }
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
