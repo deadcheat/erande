@@ -10,6 +10,6 @@
     "uglify-js-brunch": ">= 1.0 < 1.8"
   },
   "scripts": {
-    "postinstall": "brunch build --production"
+    "postinstall": "brunch build"
   }
 }

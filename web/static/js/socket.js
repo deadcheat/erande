@@ -1,5 +1,5 @@
 // NOTE: The contents of this file will only be executed if
-// you uncomment its entry in "web/static/js/app.js".
+// you uncomment its entry in "web/static/js/app.json".
 
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
@@ -98,6 +98,7 @@ channel.on("proposed", payload => {
     line.removeClass("disabled")
     line.removeClass("light-green")
     line.removeClass("orange")
+    line.unbind()
   })
   question_title.empty()
   question_title.append(payload.question_title)
@@ -118,6 +119,7 @@ channel.on("proposed", payload => {
       $(this).addClass('light-green')
       $.each([0,1,2,3], function(index) {
         $("li#line-answer-"+index).addClass("disabled")
+        $("li#line-answer-"+index).unbind()
       })
     })
     if (solution.correct === true) {
@@ -144,6 +146,7 @@ channel.join()
         solution_anchor.empty()
         solution_anchor.append(solution.body)
         var line = $("li#line-answer-"+i)
+        line.unbind()
         line.on("click", function(event) {
           var name = $("#username").val()
           if ($('.disabled').length) {

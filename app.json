@@ -1,0 +1,30 @@
+{
+  "name": "AllZohyoThanksgiving",
+  "description": "quiz app using channel.",
+  "keywords": [
+    "elixir",
+    "phoenixframework"
+  ],
+  "repository": "https://github.com/yodatomato/zohyothanksgiving",
+  "scripts": {
+    "postdeploy": "mix ecto.migrate"
+  },
+  "env": {
+    "SECRET_KEY_BASE": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "MIX_ENV": "prod"
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir"
+    },
+    {
+      "url": "https://github.com/gjaldon/heroku-buildpack-phoenix-static"
+    }
+  ]
+}

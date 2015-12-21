@@ -94,7 +94,6 @@ defmodule Zohyothanksgiving.SolutionController do
   ## 選択した選択肢の正答マークを削除
   ## ---------------------------
   def unmark(conn, %{"id" => id, "question_id" => question_id}) do
-    solution = Repo.get!(Solution, id)
     Repo.delete_all(from(c in Collectanswer, where: c.solution_id == ^id))
     conn
     |> put_flash(:info, "solution unmarked successfully.")

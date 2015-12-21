@@ -98,7 +98,7 @@ defmodule Zohyothanksgiving.QuestionController do
   end
 
   # 問題取り消し
-  def unpropose(conn, %{"id" => id}) do
+  def unpropose(conn, _params) do
     Repo.delete_all(ProposedQuestion)
     Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}
     conn
@@ -117,6 +117,7 @@ defmodule Zohyothanksgiving.QuestionController do
                    left_join: a in Answer, on: a.solution_id == s.id,
                    where: s.question_id == ^proposed_question.question_id,
                    group_by: s.id,
+                   order_by: s.id,
                    select: {s.id, count(a.id)}
       answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
       Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
