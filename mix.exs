@@ -4,7 +4,7 @@ defmodule Zohyothanksgiving.Mixfile do
   def project do
     [app: :zohyothanksgiving,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -18,7 +18,7 @@ defmodule Zohyothanksgiving.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Zohyothanksgiving, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex]]
   end
 
@@ -30,11 +30,12 @@ defmodule Zohyothanksgiving.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.0.4"},
-     {:phoenix_ecto, "~> 1.1"},
+    [{:phoenix, "~> 1.1.4"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.1"},
+     {:phoenix_ecto, "~> 2.0"},
+     {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"}]
   end
 
