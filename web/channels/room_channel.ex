@@ -26,8 +26,13 @@ defmodule Zohyothanksgiving.RoomChannel do
     end
   end
 
+  # 選択肢をクリックした時のPUSHを受け取る
   def handle_in("answer", %{"name" => name, "solution_id" => solution_id}, socket) do
-    check = Repo.all(from(a in Answer, where: a.respondent == ^name and a.solution_id == ^solution_id))
+
+    check = case String.length(name) do
+      0 -> []
+      _ -> check = Repo.all(from(a in Answer, where: a.respondent == ^name and a.solution_id == ^solution_id))
+    end
 
     if length(check) == 0 do
       Repo.insert!(
