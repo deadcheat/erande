@@ -14,13 +14,13 @@ defmodule Zohyothanksgiving.SolutionController do
   def index(conn, %{"question_id" => question_id}) do
     question = Repo.get(Question, question_id)
     solutions = Repo.all(from(s in Solution, where: s.question_id == ^question_id, order_by: s.id, preload: :collectanswer))
-    render(conn, "index.html", question_id: question_id, solutions: solutions, question: question)
+    render(conn, "index.html", question_id: question_id, solutions: solutions, question: question, current_user: get_session(conn, :current_user))
   end
 
   # get /questions/{question_id}/solutions/new
   def new(conn, %{"question_id" => question_id}) do
     changeset = Solution.changeset(%Solution{})
-    render(conn, "new.html", question_id: question_id, changeset: changeset)
+    render(conn, "new.html", question_id: question_id, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
   # post /questions/{question_id}/solutions/
@@ -33,21 +33,21 @@ defmodule Zohyothanksgiving.SolutionController do
         |> put_flash(:info, "Solution created successfully.")
         |> redirect(to: question_solution_path(conn, :index, solution.question_id))
       {:error, changeset} ->
-        render(conn, "new.html", question_id: solution_params["question_id"], changeset: changeset)
+        render(conn, "new.html", question_id: solution_params["question_id"], changeset: changeset, current_user: get_session(conn, :current_user))
     end
   end
 
   # get /questions/{question_id}/solutions/{id}
   def show(conn, %{"id" => id}) do
     solution = Repo.get!(Solution, id)
-    render(conn, "show.html", question_id: solution.question_id, solution: solution)
+    render(conn, "show.html", question_id: solution.question_id, solution: solution, current_user: get_session(conn, :current_user))
   end
 
   # get /questions/{question_id}/solutions/{id}/edit
   def edit(conn, %{"id" => id, "question_id" => question_id}) do
     solution = Repo.get!(Solution, id)
     changeset = Solution.changeset(solution)
-    render(conn, "edit.html", question_id: question_id, solution: solution, changeset: changeset)
+    render(conn, "edit.html", question_id: question_id, solution: solution, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
   # put /questions/{question_id}/solutions/{id}
@@ -61,7 +61,7 @@ defmodule Zohyothanksgiving.SolutionController do
         |> put_flash(:info, "Solution updated successfully.")
         |> redirect(to: question_solution_path(conn, :show, solution.question_id, solution))
       {:error, changeset} ->
-        render(conn, "edit.html", question_id: solution.question_id, solution: solution, changeset: changeset)
+        render(conn, "edit.html", question_id: solution.question_id, solution: solution, changeset: changeset, current_user: get_session(conn, :current_user))
     end
   end
 

@@ -40,6 +40,17 @@ form.link, form.button {
   padding-left: 15px;
 }
 
+.dropdown-content li>form, li>form>a {
+  font-size: 16px;
+  color: #26a69a;
+  display: block;
+  line-height: 22px;
+}
+
+.text-on-white {
+  color: #26a69a;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {

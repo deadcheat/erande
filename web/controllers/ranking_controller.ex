@@ -21,6 +21,6 @@ defmodule Zohyothanksgiving.RankingController do
                  select: {a.respondent, count(a.solution_id)}
     worstranking = query_norank |> Repo.all |> Enum.map fn {name, count} -> %{name: name, count: count} end
     IO.inspect ranking, pretty: true
-    render(conn, "ranking.html", ranking: ranking, worstranking: worstranking)
+    render(conn, "ranking.html", ranking: ranking, worstranking: worstranking, current_user: get_session(conn, :current_user))
   end
 end

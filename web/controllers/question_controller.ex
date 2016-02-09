@@ -14,18 +14,18 @@ defmodule Zohyothanksgiving.QuestionController do
   # get /questions/
   def index(conn, _params) do
     questions = Repo.all(from(q in Question, preload: :proposed_question))
-    render(conn, "index.html", questions: questions)
+    render(conn, "index.html", questions: questions, current_user: get_session(conn, :current_user))
   end
 
   # get /questions/new
   def new(conn, _params) do
     changeset = Question.changeset(%Question{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
   # post /questions/
   def create(conn, %{"question" => question_params}) do
-    changeset = Question.changeset(%Question{}, question_params)
+    changeset = Question.changeset(%Question{}, question_params, current_user: get_session(conn, :current_user))
 
     case Repo.insert(changeset) do
       {:ok, _question} ->
@@ -33,7 +33,7 @@ defmodule Zohyothanksgiving.QuestionController do
         |> put_flash(:info, "Question created successfully.")
         |> redirect(to: question_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, current_user: get_session(conn, :current_user))
     end
   end
 
@@ -42,20 +42,20 @@ defmodule Zohyothanksgiving.QuestionController do
     question = Repo.get!(Question, id)
     solutions = Repo.all(from(s in Solution, where: s.question_id == ^question.id, order_by: s.id, preload: :collectanswer))
     IO.inspect question, pretty: true
-    render(conn, "show.html", question: question, solutions: solutions)
+    render(conn, "show.html", question: question, solutions: solutions, current_user: get_session(conn, :current_user))
   end
 
   # get /questions/:id/edit
   def edit(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
     changeset = Question.changeset(question)
-    render(conn, "edit.html", question: question, changeset: changeset)
+    render(conn, "edit.html", question: question, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
   # put /questions/:id
   def update(conn, %{"id" => id, "question" => question_params}) do
     question = Repo.get!(Question, id)
-    changeset = Question.changeset(question, question_params)
+    changeset = Question.changeset(question, question_params, current_user: get_session(conn, :current_user))
 
     case Repo.update(changeset) do
       {:ok, question} ->
@@ -63,7 +63,7 @@ defmodule Zohyothanksgiving.QuestionController do
         |> put_flash(:info, "Question updated successfully.")
         |> redirect(to: question_path(conn, :show, question))
       {:error, changeset} ->
-        render(conn, "edit.html", question: question, changeset: changeset)
+        render(conn, "edit.html", question: question, changeset: changeset, current_user: get_session(conn, :current_user))
     end
   end
 

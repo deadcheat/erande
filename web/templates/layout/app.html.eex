@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import FontAwesome Font-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,10 +24,26 @@
     <div class="container" role="main">
       <nav>
         <div class="nav-wrapper">
-          <a href="/" class="brand-logo hide-on-small-only">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</a>
-          <a href="/" class="brand-logo hide-on-med-and-up">オール雑兵大感謝祭</a>
+          <a href="/" class="brand-logo left hide-on-small-only">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</a>
+          <a href="/" class="brand-logo left hide-on-med-and-up">オール雑兵大感謝祭</a>
+          <ul id="nav-mobile" class="right">
+            <li>
+            <%= if @current_user do %>
+            <a class="dropdown-button" href="#!" data-activates="dropdown1"><img class="responsive-img" src="<%= @current_user.avatar %>"></a>
+            <input id="username" type="hidden" name="name" value="<%= @current_user.name %>(<%= @current_user.nickname %>)">
+            <% else %>
+              <a class="" href="/auth/twitter">Twitterログイン</a>
+              <input id="username" type="hidden" name="name" value="">
+            <% end %>
+            </li>
+          </ul>
         </div>
       </nav>
+
+      <!-- Dropdown Structure -->
+      <ul id="dropdown1" class="dropdown-content">
+        <li><%= link "ログアウト", to: auth_path(@conn, :delete), method: :delete, class: "text-on-white" %></li>
+      </ul>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
