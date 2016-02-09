@@ -25,7 +25,7 @@
       <nav>
         <div class="nav-wrapper">
           <a href="/" class="brand-logo left hide-on-small-only">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</a>
-          <a href="/" class="brand-logo left hide-on-med-and-up">オール雑兵大感謝祭</a>
+          <a href="/" class="brand-logo left hide-on-med-and-up">感謝</a>
           <ul id="nav-mobile" class="right">
             <li>
             <%= if @current_user do %>

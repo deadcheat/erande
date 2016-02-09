@@ -14,7 +14,9 @@
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
     },
-    "MIX_ENV": "prod"
+    "MIX_ENV": "prod",
+    "TWITTER_CONSUMER_KEY": "twitter-api-key",
+    "TWITTER_CONSUMER_SECRET": "twitter-api-secret"
   },
   "addons": [
     "heroku-postgresql:hobby-dev"
