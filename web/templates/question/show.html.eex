@@ -20,6 +20,7 @@
   <tr>
     <th>正答？</th>
     <th>文章</th>
+    <th>現在の回答数</th>
 
   </tr>
   </thead>
@@ -33,6 +34,9 @@
     </td>
     <td>
       <%= solution.body %>
+    </td>
+    <td>
+      <%= @answers[solution.id] %>
     </td>
 
   </tr>

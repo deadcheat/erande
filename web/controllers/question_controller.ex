@@ -41,8 +41,23 @@ defmodule Zohyothanksgiving.QuestionController do
   def show(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
     solutions = Repo.all(from(s in Solution, where: s.question_id == ^question.id, order_by: s.id, preload: :collectanswer))
+    query_answers = from a in Answer,
+             left_join: s in Solution, on: s.id == a.solution_id and s.question_id == ^id,
+             group_by: [a.solution_id],
+             order_by: [asc: a.solution_id],
+             select: {a.solution_id, count(a.solution_id)}
+    answers = query_answers |> Repo.all |> Enum.map fn {id, count} -> %{id => count} end
+    map_answers = merge_array_map(%{}, answers)
     IO.inspect question, pretty: true
-    render(conn, "show.html", question: question, solutions: solutions, current_user: get_session(conn, :current_user))
+    IO.inspect map_answers, pretty: true
+    render(conn, "show.html", question: question, solutions: solutions, current_user: get_session(conn, :current_user), answers: map_answers)
+  end
+
+  def merge_array_map(src, [head|tail]) do
+    merge_array_map(Map.merge(src, head), tail)
+  end
+  def merge_array_map(src, []) do
+    src
   end
 
   # get /questions/:id/edit
