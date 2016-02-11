@@ -40,7 +40,8 @@ defmodule Erande.Mixfile do
      {:cowboy, "~> 1.0"},
      {:ueberauth, "~> 0.2"},
      {:ueberauth_twitter, "~> 0.2"},
-     {:oauth, github: "tim/erlang-oauth"}]
+     {:oauth, github: "tim/erlang-oauth"},
+     { :exrm, "~> 0.19.9" }]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
