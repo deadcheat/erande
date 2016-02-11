@@ -1,7 +1,7 @@
-defmodule Zohyothanksgiving.AnswerTest do
-  use Zohyothanksgiving.ModelCase
+defmodule Erande.AnswerTest do
+  use Erande.ModelCase
 
-  alias Zohyothanksgiving.Answer
+  alias Erande.Answer
 
   @valid_attrs %{respondent: "some content"}
   @invalid_attrs %{}

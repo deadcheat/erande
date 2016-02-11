@@ -1,12 +1,12 @@
-defmodule Zohyothanksgiving.Solution do
-  use Zohyothanksgiving.Web, :model
+defmodule Erande.Solution do
+  use Erande.Web, :model
 
   schema "solutions" do
     field :body, :string
 
-    belongs_to :question, Zohyothanksgiving.Question, foreign_key: :question_id
-    has_one :collectanswer, Zohyothanksgiving.Collectanswer
-    has_many :answers, Zohyothanksgiving.Answer
+    belongs_to :question, Erande.Question, foreign_key: :question_id
+    has_one :collectanswer, Erande.Collectanswer
+    has_many :answers, Erande.Answer
     timestamps
   end
 

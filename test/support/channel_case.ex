@@ -1,4 +1,4 @@
-defmodule Zohyothanksgiving.ChannelCase do
+defmodule Erande.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,19 +20,19 @@ defmodule Zohyothanksgiving.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Zohyothanksgiving.Repo
+      alias Erande.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
 
       # The default endpoint for testing
-      @endpoint Zohyothanksgiving.Endpoint
+      @endpoint Erande.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Zohyothanksgiving.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Erande.Repo, [])
     end
 
     :ok

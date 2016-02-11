@@ -1,11 +1,11 @@
 {
-  "name": "AllZohyoThanksgiving",
+  "name": "Erande",
   "description": "quiz app using channel.",
   "keywords": [
     "elixir",
     "phoenixframework"
   ],
-  "repository": "https://github.com/yodatomato/zohyothanksgiving",
+  "repository": "https://github.com/yodatomato/erande",
   "scripts": {
     "postdeploy": "mix ecto.migrate"
   },

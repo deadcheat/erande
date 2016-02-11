@@ -1,7 +1,7 @@
-defmodule Zohyothanksgiving.SolutionTest do
-  use Zohyothanksgiving.ModelCase
+defmodule Erande.SolutionTest do
+  use Erande.ModelCase
 
-  alias Zohyothanksgiving.Solution
+  alias Erande.Solution
 
   @valid_attrs %{body: "some content"}
   @invalid_attrs %{}

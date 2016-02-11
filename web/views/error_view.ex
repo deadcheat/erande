@@ -1,5 +1,5 @@
-defmodule Zohyothanksgiving.ErrorView do
-  use Zohyothanksgiving.Web, :view
+defmodule Erande.ErrorView do
+  use Erande.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

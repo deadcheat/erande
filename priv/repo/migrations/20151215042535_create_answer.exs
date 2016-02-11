@@ -1,4 +1,4 @@
-defmodule Zohyothanksgiving.Repo.Migrations.CreateAnswer do
+defmodule Erande.Repo.Migrations.CreateAnswer do
   use Ecto.Migration
 
   def change do

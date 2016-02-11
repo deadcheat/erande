@@ -1,12 +1,12 @@
 ## ---------------------------
 ## 解答選択肢に関連するRESTコントローラー
 ## ---------------------------
-defmodule Zohyothanksgiving.SolutionController do
-  use Zohyothanksgiving.Web, :controller
+defmodule Erande.SolutionController do
+  use Erande.Web, :controller
 
-  alias Zohyothanksgiving.Solution
-  alias Zohyothanksgiving.Question
-  alias Zohyothanksgiving.Collectanswer
+  alias Erande.Solution
+  alias Erande.Question
+  alias Erande.Collectanswer
 
   plug :scrub_params, "solution" when action in [:create, :update]
 

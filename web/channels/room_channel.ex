@@ -1,14 +1,14 @@
-defmodule Zohyothanksgiving.RoomChannel do
-  use Zohyothanksgiving.Web, :channel
+defmodule Erande.RoomChannel do
+  use Erande.Web, :channel
 
   require Logger
 
-  alias Zohyothanksgiving.Solution
-  alias Zohyothanksgiving.Answer
+  alias Erande.Solution
+  alias Erande.Answer
 
   def join("rooms:lobby", payload, socket) do
     if authorized?(payload) do
-      proposed_questions = Repo.all Zohyothanksgiving.ProposedQuestion
+      proposed_questions = Repo.all Erande.ProposedQuestion
       IO.inspect proposed_questions, pretty: true
       if length(proposed_questions) == 0 do
         {:ok, %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}, socket}

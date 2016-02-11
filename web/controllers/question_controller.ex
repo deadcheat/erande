@@ -1,13 +1,13 @@
 ## ----------------------
 ## 問題管理コントローラー
 ## ----------------------
-defmodule Zohyothanksgiving.QuestionController do
-  use Zohyothanksgiving.Web, :controller
+defmodule Erande.QuestionController do
+  use Erande.Web, :controller
 
-  alias Zohyothanksgiving.Question
-  alias Zohyothanksgiving.Solution
-  alias Zohyothanksgiving.Answer
-  alias Zohyothanksgiving.ProposedQuestion
+  alias Erande.Question
+  alias Erande.Solution
+  alias Erande.Answer
+  alias Erande.ProposedQuestion
 
   plug :scrub_params, "question" when action in [:create, :update]
 
@@ -106,7 +106,7 @@ defmodule Zohyothanksgiving.QuestionController do
     rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
     IO.inspect rs_solutions, pretty: true
 
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}
+    Erande.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: question.id, question_title: question.title, question_body: question.body, solutions: rs_solutions}
     conn
     |> put_flash(:info, "問題を公開しました")
     |> redirect(to: question_path(conn, :show, id))
@@ -115,7 +115,7 @@ defmodule Zohyothanksgiving.QuestionController do
   # 問題取り消し
   def unpropose(conn, _params) do
     Repo.delete_all(ProposedQuestion)
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}
+    Erande.Endpoint.broadcast! "rooms:lobby", "proposed", %{question_id: 0, question_title: "", question_body: "出題待ち", solutions: []}
     conn
     |> put_flash(:info, "問題を取り消ししました")
     |> redirect(to: question_path(conn, :index))
@@ -135,7 +135,7 @@ defmodule Zohyothanksgiving.QuestionController do
                    order_by: s.id,
                    select: {s.id, count(a.id)}
       answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
-      Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
+      Erande.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
       IO.inspect answers, pretty: true
     end
     conn
@@ -145,7 +145,7 @@ defmodule Zohyothanksgiving.QuestionController do
 
   # アンサーオープン
   def answeropen(conn, %{"id" => id}) do
-    Zohyothanksgiving.Endpoint.broadcast! "rooms:lobby", "answeropen", %{}
+    Erande.Endpoint.broadcast! "rooms:lobby", "answeropen", %{}
     conn
     |> put_flash(:info, "問題画面に解答を反映しました")
     |> redirect(to: question_path(conn, :show, id))

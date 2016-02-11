@@ -25,12 +25,13 @@ form.link, form.button {
   border-bottom: 1px solid #e5e5e5;
 }
 .logo {
-  width: 519px;
-  height: 71px;
+  width: 99px;
+  height: 49px;
   display: inline-block;
-  margin-bottom: 1em;
-  background-image: url("/images/phoenix.png");
-  background-size: 519px 71px;
+  /*margin-bottom: 1em;*/
+  background-image: url("/images/Erande-small.png");
+  /*background-size: 99px 99px;*/
+  background-repeat: no-repeat;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -87,5 +88,14 @@ form.link, form.button {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+  .logo {
+    width: 500px;
+    height: 60px;
+    display: inline-block;
+    /*margin-bottom: 1em;*/
+    background-image: url("/images/Erande.png");
+    /*background-size: 500px 99px;*/
+    background-repeat: no-repeat;
   }
 }

@@ -1,5 +1,5 @@
-defmodule Zohyothanksgiving.AuthController do
-  use Zohyothanksgiving.Web, :controller
+defmodule Erande.AuthController do
+  use Erande.Web, :controller
   plug Ueberauth
   alias Ueberauth.Strategy.Helpers
 

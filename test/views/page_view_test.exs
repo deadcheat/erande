@@ -1,3 +1,3 @@
-defmodule Zohyothanksgiving.PageViewTest do
-  use Zohyothanksgiving.ConnCase, async: true
+defmodule Erande.PageViewTest do
+  use Erande.ConnCase, async: true
 end

@@ -1,7 +1,7 @@
-defmodule Zohyothanksgiving.QuestionControllerTest do
-  use Zohyothanksgiving.ConnCase
+defmodule Erande.QuestionControllerTest do
+  use Erande.ConnCase
 
-  alias Zohyothanksgiving.Question
+  alias Erande.Question
   @valid_attrs %{body: "some content", title: "some content"}
   @invalid_attrs %{}
 

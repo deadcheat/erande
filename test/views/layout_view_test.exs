@@ -1,3 +1,3 @@
-defmodule Zohyothanksgiving.LayoutViewTest do
-  use Zohyothanksgiving.ConnCase, async: true
+defmodule Erande.LayoutViewTest do
+  use Erande.ConnCase, async: true
 end

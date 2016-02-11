@@ -1,8 +1,8 @@
-defmodule Zohyothanksgiving.RankingController do
-  use Zohyothanksgiving.Web, :controller
+defmodule Erande.RankingController do
+  use Erande.Web, :controller
 
-  alias Zohyothanksgiving.Answer
-  alias Zohyothanksgiving.Collectanswer
+  alias Erande.Answer
+  alias Erande.Collectanswer
 
   # get /ranking/
   def ranking(conn, _params) do

@@ -1,13 +1,13 @@
-defmodule Zohyothanksgiving.Question do
-  use Zohyothanksgiving.Web, :model
+defmodule Erande.Question do
+  use Erande.Web, :model
 
   schema "questions" do
     field :title, :string
     field :body, :string
 
-    has_one  :proposed_question, Zohyothanksgiving.ProposedQuestion
-    has_many :solutions, Zohyothanksgiving.Solution
-    has_many :collectanswers, Zohyothanksgiving.Collectanswer
+    has_one  :proposed_question, Erande.ProposedQuestion
+    has_many :solutions, Erande.Solution
+    has_many :collectanswers, Erande.Collectanswer
     timestamps
   end
 

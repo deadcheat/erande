@@ -1,4 +1,4 @@
-defmodule Zohyothanksgiving.ErrorHelpers do
+defmodule Erande.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

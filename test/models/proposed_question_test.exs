@@ -1,7 +1,7 @@
-defmodule Zohyothanksgiving.ProposedQuestionTest do
-  use Zohyothanksgiving.ModelCase
+defmodule Erande.ProposedQuestionTest do
+  use Erande.ModelCase
 
-  alias Zohyothanksgiving.ProposedQuestion
+  alias Erande.ProposedQuestion
 
   @valid_attrs %{}
   @invalid_attrs %{}

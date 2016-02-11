@@ -1,7 +1,7 @@
-defmodule Zohyothanksgiving.RoomChannelTest do
-  use Zohyothanksgiving.ChannelCase
+defmodule Erande.RoomChannelTest do
+  use Erande.ChannelCase
 
-  alias Zohyothanksgiving.RoomChannel
+  alias Erande.RoomChannel
 
   setup do
     {:ok, _, socket} =

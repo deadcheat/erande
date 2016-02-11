@@ -1,4 +1,4 @@
-defmodule Zohyothanksgiving.Gettext do
+defmodule Erande.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
@@ -20,5 +20,5 @@ defmodule Zohyothanksgiving.Gettext do
 
   See the [Gettext Docs](http://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :zohyothanksgiving
+  use Gettext, otp_app: :erande
 end

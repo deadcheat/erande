@@ -1,9 +1,9 @@
-defmodule Zohyothanksgiving.ProposedQuestion do
-  use Zohyothanksgiving.Web, :model
+defmodule Erande.ProposedQuestion do
+  use Erande.Web, :model
 
   schema "proposed_questions" do
     field :status, :string
-    belongs_to :question, Zohyothanksgiving.Question
+    belongs_to :question, Erande.Question
 
     timestamps
   end

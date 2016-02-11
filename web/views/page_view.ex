@@ -1,3 +1,3 @@
-defmodule Zohyothanksgiving.PageView do
-  use Zohyothanksgiving.Web, :view
+defmodule Erande.PageView do
+  use Erande.Web, :view
 end

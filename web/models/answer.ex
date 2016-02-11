@@ -1,9 +1,9 @@
-defmodule Zohyothanksgiving.Answer do
-  use Zohyothanksgiving.Web, :model
+defmodule Erande.Answer do
+  use Erande.Web, :model
 
   schema "answers" do
     field :respondent, :string
-    belongs_to :solution, Zohyothanksgiving.Solution
+    belongs_to :solution, Erande.Solution
 
     timestamps
   end

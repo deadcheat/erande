@@ -22,8 +22,8 @@ Channelを使って某オールスター感謝祭的なクイズ大会ができ�
 
 ## ローカル起動方法
 
-  0. `git clone git@github.com:yodatomato/zohyothanksgiving.git`
-  1. `cd zohyothanksgiving`
+  0. `git clone git@github.com:yodatomato/erande.git`
+  1. `cd erande`
   1. Install dependencies with `mix deps.get`
   2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   3. Start Phoenix endpoint with `mix phoenix.server`

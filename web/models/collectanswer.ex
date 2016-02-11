@@ -1,9 +1,9 @@
-defmodule Zohyothanksgiving.Collectanswer do
-  use Zohyothanksgiving.Web, :model
+defmodule Erande.Collectanswer do
+  use Erande.Web, :model
 
   schema "collectanswers" do
-    belongs_to :question, Zohyothanksgiving.Question, foreign_key: :question_id
-    belongs_to :solution, Zohyothanksgiving.Solution, foreign_key: :solution_id
+    belongs_to :question, Erande.Question, foreign_key: :question_id
+    belongs_to :solution, Erande.Solution, foreign_key: :solution_id
 
     timestamps
   end

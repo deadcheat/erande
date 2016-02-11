@@ -1,5 +1,5 @@
-defmodule Zohyothanksgiving.Router do
-  use Zohyothanksgiving.Web, :router
+defmodule Erande.Router do
+  use Erande.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule Zohyothanksgiving.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Zohyothanksgiving do
+  scope "/", Erande do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -30,7 +30,7 @@ defmodule Zohyothanksgiving.Router do
     get "/questions/:id/answeropen", QuestionController, :answeropen
   end
 
-  scope "/auth", Zohyothanksgiving do
+  scope "/auth", Erande do
     pipe_through [:browser]
 
     get "/:provider", AuthController, :request
@@ -40,7 +40,7 @@ defmodule Zohyothanksgiving.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Zohyothanksgiving do
+  # scope "/api", Erande do
   #   pipe_through :api
   # end
 end

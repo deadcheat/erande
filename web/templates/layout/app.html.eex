@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>オール雑兵大感謝祭</title>
+    <title>アンケート・クイズアプリ エランデ</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
@@ -24,8 +24,7 @@
     <div class="container" role="main">
       <nav>
         <div class="nav-wrapper">
-          <a href="/" class="brand-logo left hide-on-small-only">&nbsp;&nbsp;輝け！オール雑兵！大感謝祭！！</a>
-          <a href="/" class="brand-logo left hide-on-med-and-up">感謝</a>
+          <a href="/" class="brand-logo left logo"></a>
           <ul id="nav-mobile" class="right">
             <li>
             <%= if @current_user do %>

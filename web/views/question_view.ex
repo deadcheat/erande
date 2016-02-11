@@ -1,3 +1,3 @@
-defmodule Zohyothanksgiving.QuestionView do
-  use Zohyothanksgiving.Web, :view
+defmodule Erande.QuestionView do
+  use Erande.Web, :view
 end

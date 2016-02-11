@@ -1,8 +1,8 @@
-defmodule Zohyothanksgiving.Mixfile do
+defmodule Erande.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :zohyothanksgiving,
+    [app: :erande,
      version: "0.0.1",
      elixir: "~> 1.1",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule Zohyothanksgiving.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Zohyothanksgiving, []},
+    [mod: {Erande, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex,
                     :oauth, :ueberauth_twitter]]
