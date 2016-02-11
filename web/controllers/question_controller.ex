@@ -25,7 +25,7 @@ defmodule Erande.QuestionController do
 
   # post /questions/
   def create(conn, %{"question" => question_params}) do
-    changeset = Question.changeset(%Question{}, question_params, current_user: get_session(conn, :current_user))
+    changeset = Question.changeset(%Question{}, question_params)
 
     case Repo.insert(changeset) do
       {:ok, _question} ->
@@ -70,7 +70,7 @@ defmodule Erande.QuestionController do
   # put /questions/:id
   def update(conn, %{"id" => id, "question" => question_params}) do
     question = Repo.get!(Question, id)
-    changeset = Question.changeset(question, question_params, current_user: get_session(conn, :current_user))
+    changeset = Question.changeset(question, question_params)
 
     case Repo.update(changeset) do
       {:ok, question} ->
@@ -86,6 +86,7 @@ defmodule Erande.QuestionController do
   def delete(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
 
+    Repo.delete_all(from(p in ProposedQuestion, where: p.question_id == ^id))
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(question)
