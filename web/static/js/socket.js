@@ -58,10 +58,12 @@ let channel = socket.channel("rooms:lobby", {})
 let question = $("#question")
 let question_title = $("#question-title")
 let answers_index = []
+let solutions_indexes = []
+let colors = ["red","green", "blue", "yellow", "pink", "teal", "purple", "lime", "orange", "indigo", "cyan", "amber"]
 
 channel.on("answercheck", payload => {
   console.log("answercheck", payload)
-  $.each([0,1,2,3], function(index) {
+  $.each(solutions_indexes, function(index) {
     var line = $("li#line-answer-"+index)
     line.addClass("disabled")
     line.removeClass("light-green")
@@ -76,7 +78,7 @@ channel.on("answercheck", payload => {
 
 channel.on("answeropen", payload => {
   console.log("answeropen", payload)
-  $.each([0,1,2,3], function(index) {
+  $.each(solutions_indexes, function(index) {
     var line = $("li#line-answer-"+index)
     line.removeClass("light-green")
     line.removeClass("orange")
@@ -89,7 +91,7 @@ channel.on("answeropen", payload => {
 
 channel.on("proposed", payload => {
   answers_index = []
-  $.each([0,1,2,3], function(index) {
+  $.each(solutions_indexes, function(index) {
     var solution_anchor = $("#answer-"+index)
     solution_anchor.empty()
     var counter = $("#answer-count-"+index)
@@ -100,11 +102,21 @@ channel.on("proposed", payload => {
     line.removeClass("orange")
     line.unbind()
   })
+  solutions_indexes = []
+  $("ul.collection>li").remove()
   question_title.empty()
   question_title.append(payload.question_title)
   question.empty()
   question.append(payload.question_body)
   $.each(payload.solutions, function(i, solution){
+    solutions_indexes.push(i)
+    $("ul.collection").append(
+      '<li id="line-answer-' + i +'" class="collection-item avatar">' +
+      '<i class="material-icons circle ' + colors[i] + '">' + String.fromCharCode(65 + i) + '</i>' +
+      '<h5 id="answer-' + i +'" class="col s9 m11"></h5>' +
+      '<h5 id="answer-count-' + i +'" class="col s3 m1"></h5>' +
+      '</li>'
+    )
     var solution_anchor = $("#answer-"+i)
     solution_anchor.empty()
     solution_anchor.append(solution.body)
@@ -117,7 +129,7 @@ channel.on("proposed", payload => {
       console.log("push answer ", solution.id, " by " + name)
       channel.push("answer", {name: name, solution_id: solution.id})
       $(this).addClass('light-green')
-      $.each([0,1,2,3], function(index) {
+      $.each(solutions_indexes, function(index) {
         $("li#line-answer-"+index).addClass("disabled")
         $("li#line-answer-"+index).unbind()
       })
@@ -131,6 +143,7 @@ channel.on("proposed", payload => {
 channel.join()
   .receive("ok", resp => {
     answers_index = []
+    solutions_indexes = []
     question.empty()
     question_title.empty()
     question.append(resp.question_body)
@@ -142,6 +155,14 @@ channel.join()
       question_title.append("次の問題から参加できます")
     } else {
       $.each(resp.solutions, function(i, solution){
+        solutions_indexes.push(i)
+        $("ul.collection").append(
+          '<li id="line-answer-' + i +'" class="collection-item avatar">' +
+          '<i class="material-icons circle ' + colors[i] + ' black-text">' + String.fromCharCode(65 + i) + '</i>' +
+          '<h5 id="answer-' + i +'" class="col s9 m11"></h5>' +
+          '<h5 id="answer-count-' + i +'" class="col s3 m1"></h5>' +
+          '</li>'
+        )
         var solution_anchor = $("#answer-"+i)
         solution_anchor.empty()
         solution_anchor.append(solution.body)
@@ -155,7 +176,7 @@ channel.join()
           console.log("push answer ", solution.id, " by " + name)
           channel.push("answer", {name: name, solution_id: solution.id})
           $(this).addClass('light-green')
-          $.each([0,1,2,3], function(index) {
+          $.each(solutions_indexes, function(index) {
             $("li#line-answer-"+i).addClass("disabled")
           })
         })
