@@ -158,7 +158,7 @@ channel.join()
         solutions_indexes.push(i)
         $("ul.collection").append(
           '<li id="line-answer-' + i +'" class="collection-item avatar">' +
-          '<i class="material-icons circle ' + colors[i] + ' black-text">' + String.fromCharCode(65 + i) + '</i>' +
+          '<i class="material-icons circle ' + colors[i] + '">' + String.fromCharCode(65 + i) + '</i>' +
           '<h5 id="answer-' + i +'" class="col s9 m11"></h5>' +
           '<h5 id="answer-count-' + i +'" class="col s3 m1"></h5>' +
           '</li>'
