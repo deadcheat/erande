@@ -46,7 +46,7 @@ defmodule Erande.QuestionController do
              group_by: [a.solution_id],
              order_by: [asc: a.solution_id],
              select: {a.solution_id, count(a.solution_id)}
-    answers = query_answers |> Repo.all |> Enum.map fn {id, count} -> %{id => count} end
+    answers = query_answers |> Repo.all |> Enum.map(fn {id, count} -> %{id => count} end)
     map_answers = merge_array_map(%{}, answers)
     IO.inspect question, pretty: true
     IO.inspect map_answers, pretty: true
@@ -86,20 +86,29 @@ defmodule Erande.QuestionController do
   def delete(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
 
-    Repo.delete_all(from(p in ProposedQuestion, where: p.question_id == ^id))
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(question)
+    case Repo.one(from(s in Solution, select: count(s.id), where: s.question_id == ^id)) do
+      x when x > 0 ->
+        conn
+        |> put_flash(:info, "選択肢を先に削除してください")
+        |> redirect(to: question_path(conn, :index))
 
-    conn
-    |> put_flash(:info, "Question deleted successfully.")
-    |> redirect(to: question_path(conn, :index))
+      _ ->
+        Repo.delete_all(from(p in ProposedQuestion, where: p.question_id == ^id))
+        # Here we use delete! (with a bang) because we expect
+        # it to always work (and if it does not, it will raise).
+        Repo.delete!(question)
+
+        conn
+        |> put_flash(:info, "Question deleted successfully.")
+        |> redirect(to: question_path(conn, :index))
+    end
+
   end
 
   # 問題公開
   def propose_question(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-               |> Repo.preload solutions: from(s in Solution, order_by: s.id)
+               |> Repo.preload(solutions: from(s in Solution, order_by: s.id))
     Repo.delete_all(ProposedQuestion)
     proposed_question = Ecto.Model.build(question, :proposed_question, status: "waiting")
     Repo.insert!(proposed_question)
@@ -135,7 +144,7 @@ defmodule Erande.QuestionController do
                    group_by: s.id,
                    order_by: s.id,
                    select: {s.id, count(a.id)}
-      answers = Repo.all(query) |> Enum.map fn {id, count} -> %{id: id, count: count} end
+      answers = Repo.all(query) |> Enum.map(fn {id, count} -> %{id: id, count: count} end)
       Erande.Endpoint.broadcast! "rooms:lobby", "answercheck", %{answers: answers}
       IO.inspect answers, pretty: true
     end

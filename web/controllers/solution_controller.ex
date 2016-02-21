@@ -6,6 +6,7 @@ defmodule Erande.SolutionController do
 
   alias Erande.Solution
   alias Erande.Question
+  alias Erande.Answer
   alias Erande.Collectanswer
 
   plug :scrub_params, "solution" when action in [:create, :update]
@@ -71,6 +72,8 @@ defmodule Erande.SolutionController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    Repo.delete_all(from(c in Collectanswer, where: c.solution_id == ^id))
+    Repo.delete_all(from(a in Answer, where: a.solution_id == ^id))
     Repo.delete!(solution)
 
     conn
