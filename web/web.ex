@@ -65,7 +65,6 @@ defmodule Erande.Web do
       use Phoenix.Channel
 
       alias Erande.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
     end
   end

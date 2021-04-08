@@ -21,7 +21,6 @@ defmodule Erande.ChannelCase do
       use Phoenix.ChannelTest
 
       alias Erande.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
 

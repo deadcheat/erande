@@ -21,7 +21,6 @@ defmodule Erande.ConnCase do
       use Phoenix.ConnTest
 
       alias Erande.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       import Erande.Router.Helpers

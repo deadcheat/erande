@@ -17,7 +17,6 @@ defmodule Erande.ModelCase do
   using do
     quote do
       alias Erande.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 2]
       import Erande.ModelCase
     end
