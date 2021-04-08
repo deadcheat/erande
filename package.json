@@ -12,6 +12,7 @@
     "phoenix_html": "file:deps/phoenix_html"
   },
   "scripts": {
-    "postinstall": "brunch build  --production"
+    "postinstall": "brunch build  --production",
+    "deploy": "brunch build --production"
   }
 }
