@@ -14,6 +14,8 @@ config :erande, Erande.Endpoint,
   pubsub: [name: Erande.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :erande, ecto_repos: [Erande.Repo]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
