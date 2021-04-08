@@ -86,7 +86,7 @@ defmodule Erande.SolutionController do
   ## ---------------------------
   def mark(conn, %{"id" => id, "question_id" => question_id}) do
     solution = Repo.get!(Solution, id)
-    collectanswer = Ecto.Model.build(solution, :collectanswer, question_id: solution.question_id)
+    collectanswer = Ecto.build_assoc(solution, :collectanswer, question_id: solution.question_id)
     Repo.insert!(collectanswer)
     conn
     |> put_flash(:info, "solution marked successfully.")

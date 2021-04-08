@@ -110,7 +110,7 @@ defmodule Erande.QuestionController do
     question = Repo.get!(Question, id)
                |> Repo.preload(solutions: from(s in Solution, order_by: s.id))
     Repo.delete_all(ProposedQuestion)
-    proposed_question = Ecto.Model.build(question, :proposed_question, status: "waiting")
+    proposed_question = Ecto.build_assoc(question, :proposed_question, status: "waiting")
     Repo.insert!(proposed_question)
     solutions = Repo.preload question.solutions, :collectanswer
     rs_solutions = Enum.map(solutions, fn(solution) -> %{id: solution.id, body: solution.body, correct: !is_nil(solution.collectanswer)} end)
