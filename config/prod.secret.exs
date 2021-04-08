@@ -10,6 +10,7 @@ config :erande, Erande.Endpoint,
 config :erande, Erande.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
+  ssl: true,
   size: 20 # The amount of database connections in the poo
 
 config :ueberauth, Ueberauth.Strategy.Twitter.OAuth,
