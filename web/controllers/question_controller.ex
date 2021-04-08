@@ -19,7 +19,7 @@ defmodule Erande.QuestionController do
 
   # get /questions/new
   def new(conn, _params) do
-    changeset = Question.changeset(%Question{})
+    changeset = Question.changeset(%Question{}, %{})
     render(conn, "new.html", changeset: changeset, current_user: get_session(conn, :current_user))
   end
 

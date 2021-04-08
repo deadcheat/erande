@@ -20,7 +20,7 @@ defmodule Erande.SolutionController do
 
   # get /questions/{question_id}/solutions/new
   def new(conn, %{"question_id" => question_id}) do
-    changeset = Solution.changeset(%Solution{})
+    changeset = Solution.changeset(%Solution{}, %{})
     render(conn, "new.html", question_id: question_id, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
