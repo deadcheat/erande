@@ -16,7 +16,8 @@
     },
     "MIX_ENV": "prod",
     "TWITTER_CONSUMER_KEY": "twitter-api-key",
-    "TWITTER_CONSUMER_SECRET": "twitter-api-secret"
+    "TWITTER_CONSUMER_SECRET": "twitter-api-secret",
+    "PGSSLMODE": "require"
   },
   "addons": [
     "heroku-postgresql:hobby-dev"
