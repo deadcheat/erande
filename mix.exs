@@ -4,7 +4,7 @@ defmodule Erande.Mixfile do
   def project do
     [app: :erande,
      version: "0.0.1",
-     elixir: "~> 1.1",
+     elixir: "~> 1.11",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -31,17 +31,20 @@ defmodule Erande.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:phoenix_html, "~> 2.4"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:ueberauth, "~> 0.2"},
-     {:ueberauth_twitter, "~> 0.2"},
-     {:oauth, github: "tim/erlang-oauth"},
-     { :exrm, "~> 0.19.9" }]
+    [
+      {:phoenix, "~> 1.5.8"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_html, "~> 2.4"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.9"},
+      {:cowboy, "~> 1.0"},
+      {:ueberauth, "~> 0.2"},
+      {:ueberauth_twitter, "~> 0.2"},
+      {:oauth, github: "tim/erlang-oauth"},
+      {:exrm, "~> 1.0.8" },
+      {:erlware_commons, "~> 1.0"},
+    ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
