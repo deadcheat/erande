@@ -24,7 +24,7 @@
     <div class="container" role="main">
       <nav>
         <div class="nav-wrapper">
-          <a href="/" class="brand-logo left logo"></a>
+          オールスター感謝祭っぽいなにか
           <ul id="nav-mobile" class="right">
             <li>
             <%= if @current_user do %>
