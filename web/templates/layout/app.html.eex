@@ -29,10 +29,10 @@
             <li>
             <%= if @current_user do %>
             <a class="dropdown-button" href="#!" data-activates="dropdown1"><img class="responsive-img" src="<%= @current_user.avatar %>"></a>
-            <input id="username" type="hidden" name="name" value="<%= @current_user.name %>(<%= @current_user.nickname %>)">
+            <%# <input id="username" type="hidden" name="name" value="<%= @current_user.name %>(<%= @current_user.nickname %>)"> %>
             <% else %>
               <%# <a class="" href="/auth/twitter">Twitterログイン</a> %>
-              <input id="username" type="hidden" name="name" value="">
+              <%# <input id="username" type="hidden" name="name" value=""> %>
             <% end %>
             </li>
           </ul>
