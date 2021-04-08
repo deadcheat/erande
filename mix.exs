@@ -34,7 +34,7 @@ defmodule Erande.Mixfile do
     [
       {:phoenix, "~> 1.5.8"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_ecto, ">= 3.2.0 and < 3.5.0"},
       {:phoenix_html, "~> 2.4"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.9"},
