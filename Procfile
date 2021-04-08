@@ -1,1 +1,1 @@
-web: mix compile.protocols && mix phoenix.server
+web: mix compile.protocols && mix phx.server

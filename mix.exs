@@ -38,7 +38,7 @@ defmodule Erande.Mixfile do
       {:phoenix_html, "~> 2.4"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.9"},
-      {:cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
       {:ueberauth, "~> 0.2"},
       {:ueberauth_twitter, "~> 0.2"},
       {:oauth, github: "tim/erlang-oauth"},
