@@ -9,6 +9,7 @@
       </div>
     </div>
   </div>
+  <input id="username" type="text" name="name" placeholder="名前を入れると多分集計できます">
   <div class="row">
     <div class="col s12 m12">
       <ul class="collection">
