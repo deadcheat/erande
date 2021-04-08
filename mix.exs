@@ -44,6 +44,7 @@ defmodule Erande.Mixfile do
       {:oauth, github: "tim/erlang-oauth"},
       {:exrm, "~> 1.0.8" },
       {:erlware_commons, "~> 1.0"},
+      {:poison, "~> 3.1"},
     ]
   end
 
