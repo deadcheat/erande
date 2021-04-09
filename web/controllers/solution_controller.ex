@@ -47,11 +47,12 @@ defmodule Erande.SolutionController do
   # get /questions/{question_id}/solutions/{id}/edit
   def edit(conn, %{"id" => id, "question_id" => question_id}) do
     solution = Repo.get!(Solution, id)
-    changeset = Solution.changeset(solution)
+    changeset = Solution.changeset(solution, %{})
     render(conn, "edit.html", question_id: question_id, solution: solution, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
   # put /questions/{question_id}/solutions/{id}
+  @spec update(Plug.Conn.t(), map) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "solution" => solution_params}) do
     solution = Repo.get!(Solution, id)
     changeset = Solution.changeset(solution, solution_params)

@@ -63,7 +63,7 @@ defmodule Erande.QuestionController do
   # get /questions/:id/edit
   def edit(conn, %{"id" => id}) do
     question = Repo.get!(Question, id)
-    changeset = Question.changeset(question)
+    changeset = Question.changeset(question, %{})
     render(conn, "edit.html", question: question, changeset: changeset, current_user: get_session(conn, :current_user))
   end
 
