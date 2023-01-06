@@ -1,7 +1,7 @@
 {
   "repository": {},
   "dependencies": {
-    "babel-brunch": "^6.0.0",
+    "babel-brunch": "^7.0.1",
     "brunch": "^2.1.1",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
